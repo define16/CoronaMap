@@ -3,3 +3,6 @@
 
 # 언어 및 프레임워크
 Python, Django
+
+# 실행
+python manage.py runserver

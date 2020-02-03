@@ -50,7 +50,7 @@
             <a class="nav-link" href="{% url 'contact' %}">마스크 좌표 공유 게시판</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'prevent' %}">코로나 예방 수칙</a>
+            <a class="nav-link" href="{% url 'contact' %}">코로나 예방 수칙</a>
           </li>
         </ul>
       </div>
@@ -88,36 +88,7 @@
       <div class="col-lg-8 col-md-10 mx-auto">
         <div class="post-preview">
           <a>
-          <!-- Kakao Map -->
-          <div id="mapwrap">
-              <!-- 지도가 표시될 div -->
-              <div id="map" style="width:100%;height:600px;"></div>
-              <!-- 지도 위에 표시될 마커 카테고리 -->
-              <div class="category">
-                  <ul>
-                      <li id="coffeeMenu" onclick="changeMarker('coffee')">
-                          <span class="ico_comm ico_coffee"></span>
-                          커피숍
-                      </li>
-                      <li id="storeMenu" onclick="changeMarker('store')">
-                          <span class="ico_comm ico_store"></span>
-                          편의점
-                      </li>
-                      <li id="carparkMenu" onclick="changeMarker('carpark')">
-                          <span class="ico_comm ico_carpark"></span>
-                          주차장
-                      </li>
-                      <li id="COMSTOMMenu" onclick="changeMarker('carpark')">
-                          <span class="ico_comm ico_carpark"></span>
-                          이미지
-                      </li>
-                  </ul>
-              </div>
-          </div>
-          <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=20db66fbe929a7c30443564ec7da594a"></script>
-          <script type="text/javascript" src="{% static 'js/kakaoMap.js' %}"></script>
-          </a>
-        </div>
+          <img src="{% static 'img/prevention.png' %}">
         <!--
         <div class="post-preview">
           <a href="post.html">
