@@ -22,7 +22,6 @@
   <link href="{% static 'css/clean-blog.min.css' %}" rel="stylesheet">
   <!-- Kakao Map -->
   <link href="{% static 'css/kakaoMap.css' %}" rel="stylesheet" type="text/css">
-
 </head>
 
 <body>
@@ -87,11 +86,25 @@
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
         <div class="post-preview">
+                  </div>
+                    <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              확진자 : 15명
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">모든 확진자</a>
+              <a class="dropdown-item" href="#">확진자 1</a>
+              <a class="dropdown-item" href="#">확진자 2</a>
+              <a class="dropdown-item" href="#" onclick="changeMarker('coffee')">확진자 3</a>
+            </div>
+      </div>
           <a>
+
           <!-- Kakao Map -->
           <div id="mapwrap">
-              <!-- 지도가 표시될 div -->
-              <div id="map" style="width:100%;height:600px;"></div>
+          <!-- 지도가 표시될 div -->
+          <div id="map" style="width:100%;height:600px;"></div>
+
               <!-- 지도 위에 표시될 마커 카테고리 -->
               <div class="category">
                   <ul>
@@ -114,10 +127,8 @@
                   </ul>
               </div>
           </div>
-          <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=20db66fbe929a7c30443564ec7da594a"></script>
-          <script type="text/javascript" src="{% static 'js/kakaoMap.js' %}"></script>
+
           </a>
-        </div>
         <!--
         <div class="post-preview">
           <a href="post.html">
@@ -228,6 +239,8 @@
 
   <!-- Custom scripts for this template -->
   <script src="{% static 'js/clean-blog.min.js' %}"></script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=20db66fbe929a7c30443564ec7da594a"></script>
+  <script type="text/javascript" src="{% static 'js/kakaoMap.js' %}"></script>
 
 </body>
 

@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="24a46551-91a7-4c3c-87f2-bccb78df9cf7" name="Default Changelist" comment="">
+    <list default="true" id="24a46551-91a7-4c3c-87f2-bccb78df9cf7" name="Default Changelist" comment="기능:드롭다운 버튼 추가, 이미지자동조절추가">
+      <change afterPath="$PROJECT_DIR$/coronaMap/mainsite/static/img/prevention.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/coronaMap/mainsite/static/img/prevention1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/coronaMap/mainsite/static/img/prevention2.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coronaMap/coronaMap/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/coronaMap/coronaMap/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coronaMap/coronaMap/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/coronaMap/coronaMap/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coronaMap/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/coronaMap/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coronaMap/mainsite/static/css/clean-blog.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/coronaMap/mainsite/static/css/clean-blog.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coronaMap/mainsite/static/img/prevention.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coronaMap/mainsite/static/js/contact_me.js" beforeDir="false" afterPath="$PROJECT_DIR$/coronaMap/mainsite/static/js/contact_me.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coronaMap/mainsite/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/coronaMap/mainsite/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coronaMap/mainsite/templates/prevent.html" beforeDir="false" afterPath="$PROJECT_DIR$/coronaMap/mainsite/templates/prevent.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,20 +36,20 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/coronaMap/mainsite/templates" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../chord_recognition_ai" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Programing Folder\Python\Corona\coronaMap\mainsite\templates" />
+      <recent name="D:\Programing Folder\Python\Corona\coronaMap\mainsite\static\img\marker" />
+      <recent name="D:\Programing Folder\Python\Corona\coronaMap\mainsite\static" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Programing Folder\Python\Corona\coronaMap\mainsite\static\img" />
       <recent name="D:\Programing Folder\Python\Corona\coronaMap\mainsite\static\img\marker" />
       <recent name="D:\Programing Folder\Python\Corona\coronaMap\mainsite\static\js" />
       <recent name="D:\Programing Folder\Python\Corona\coronaMap\mainsite\templates" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Programing Folder\Python\Corona\coronaMap\mainsite\templates" />
-      <recent name="D:\Programing Folder\Python\Corona\coronaMap\mainsite\static\img\marker" />
-      <recent name="D:\Programing Folder\Python\Corona\coronaMap\mainsite\static" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -125,7 +135,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
