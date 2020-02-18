@@ -4,14 +4,14 @@ from django.shortcuts import render
 def index(request):
     return render(request, 'index.html')
 
-def about(request):
-    return render(request, 'about.html')
+def status(request):
+    return render(request, 'status.html')
 
-def contact(request):
-    return render(request, 'contact.html')
+def board_mask(request):
+    return render(request, 'board_mask.html')
 
-def post(request):
-    return render(request, 'post.html')
+def nearby_clinic(request):
+    return render(request, 'nearby_clinic.html')
 
 def prevent(request):
     return render(request, 'prevent.html')
