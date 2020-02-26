@@ -16,8 +16,10 @@ def nearby_clinic(request):
 def prevent(request):
     return render(request, 'prevent.html')
 
-
 def mapTest(request):
-    return render(request, 'index2.html')
+    return render(request, 'index.html')
+
+def mapTest2(request):
+    return render(request, 'index3.html')
 
 

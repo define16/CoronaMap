@@ -9,4 +9,5 @@ urlpatterns = [
     path('nearby.clinic', views.nearby_clinic, name='nearby.clinic'),
     path('prevent', views.prevent, name='prevent'),
     path('mapTest', views.mapTest, name='mapTest'),
+    path('mapTest2', views.mapTest2, name='mapTest2'),
 ]

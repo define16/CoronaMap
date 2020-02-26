@@ -1,7 +1,7 @@
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
     mapOption = {
-        center: new kakao.maps.LatLng(37.498004414546934, 127.02770621963765), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
+        center: new kakao.maps.LatLng(37.7811132	,	128.9347671), // 지도의 중심좌표
+        level: 7 // 지도의 확대 레벨
     };
 
 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다.
@@ -84,24 +84,33 @@ var locations = [[38.3724912,128.4143097,'1번'],
 
 // 커피숍 마커가 표시될 좌표 배열입니다
 var coffeePositions = [
-    new kakao.maps.LatLng(37.499590490909185, 127.0263723554437),
-    new kakao.maps.LatLng(37.499427948430814, 127.02794423197847),
-    new kakao.maps.LatLng(37.498553760499505, 127.02882598822454),
-    new kakao.maps.LatLng(37.497625593121384, 127.02935713582038),
-    new kakao.maps.LatLng(37.49646391248451, 127.02675574250912),
-    new kakao.maps.LatLng(37.49629291770947, 127.02587362608637),
-    new kakao.maps.LatLng(37.49754540521486, 127.02546694890695)
+    new kakao.maps.LatLng(38.2737631,	128.5554013),
+    new kakao.maps.LatLng(38.2706048,	128.5568356),
+    new kakao.maps.LatLng(38.2015581,	128.593468),
+    new kakao.maps.LatLng(38.2005926,	128.5947703),
+    new kakao.maps.LatLng(38.2654241,	128.3596247),
+    new kakao.maps.LatLng(37.2568971,	128.0482991),
+    new kakao.maps.LatLng(38.2071264,	128.5746114)
 ];
 
 // 편의점 마커가 표시될 좌표 배열입니다
 var storePositions = [
-    new kakao.maps.LatLng(37.497535461505684, 127.02948149502778),
-    new kakao.maps.LatLng(37.49671536281186, 127.03020491448352),
-    new kakao.maps.LatLng(37.496201943633714, 127.02959405469642),
-    new kakao.maps.LatLng(37.49640072567703, 127.02726459882308),
-    new kakao.maps.LatLng(37.49640098874988, 127.02609983175294),
-    new kakao.maps.LatLng(37.49932849491523, 127.02935780247945),
-    new kakao.maps.LatLng(37.49996818951873, 127.02943721562295)
+    new kakao.maps.LatLng(38.2068758	,	128.5881271),
+    new kakao.maps.LatLng(38.3789305	,	128.4730371),
+    new kakao.maps.LatLng(38.1952536	,	128.5731771),
+    new kakao.maps.LatLng(38.2099005	,	128.5865252),
+    new kakao.maps.LatLng(38.2106879	,	128.588693),
+    new kakao.maps.LatLng(38.2039806	,	128.5899286),
+    new kakao.maps.LatLng(38.1938753	,	128.5746344),
+    new kakao.maps.LatLng(38.2165444	,	128.5795317),
+    new kakao.maps.LatLng(38.2102033	,	128.5865082),
+    new kakao.maps.LatLng(38.2039806	,	128.5899286),
+    new kakao.maps.LatLng(38.1864654	,	128.603429),
+    new kakao.maps.LatLng(38.1960432	,	128.5761283),
+    new kakao.maps.LatLng(37.7553367	,	128.9152179),
+    new kakao.maps.LatLng(37.7492664	,	128.8887254),
+    new kakao.maps.LatLng(37.7811132	,	128.9347671),
+
 ];
 
 // 주차장 마커가 표시될 좌표 배열입니다
@@ -114,6 +123,7 @@ var carparkPositions = [
     new kakao.maps.LatLng(37.49813096097184, 127.02591949495914),
     new kakao.maps.LatLng(37.497680616783086, 127.02518427952202)
 ];
+
 
 var polylines = [];
 
@@ -294,8 +304,8 @@ function changeMarker(type){
 
         var polyline = new kakao.maps.Polyline({
         path: storePositions, // 선을 구성하는 좌표배열 입니다
-        strokeWeight: 10, // 선의 두께 입니다
-        strokeColor: '#FFAE00', // 선의 색깔입니다
+        strokeWeight: 5, // 선의 두께 입니다
+        strokeColor: '#09FE00', // 선의 색깔입니다
         strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
         strokeStyle: 'solid' // 선의 스타일입니다
         });
@@ -339,27 +349,62 @@ function deletepolyline(polylines){
     polylines = [];
 }
 
-var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다
-imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
-imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+//var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다
+//imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
+//imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
-// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
-    markerPosition = new kakao.maps.LatLng(37.54699, 127.09598); // 마커가 표시될 위치입니다
-
-
-
-// 마커를 생성합니다
-var marker = new kakao.maps.Marker({
-    position: markerPosition,
-    image: markerImage // 마커이미지 설정
-});
-
-
+//// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+//var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+//    markerPosition = new kakao.maps.LatLng(37.7811132	,	128.9347671); // 마커가 표시될 위치입니다
+//
+//
+//
+//// 마커를 생성합니다
+//var marker = new kakao.maps.Marker({
+//    position: markerPosition,
+//    image: markerImage // 마커이미지 설정
+//});
 
 }
-
+//
+//var content = '<div class="wrap">' +
+//            '    <div class="info">' +
+//            '        <div class="title">' +
+//            '            카카오 스페이스닷원' +
+//            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
+//            '        </div>' +
+//            '        <div class="body">' +
+//            '            <div class="img">' +
+//            '                <img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
+//            '           </div>' +
+//            '            <div class="desc">' +
+//            '                <div class="ellipsis">제주특별자치도 제주시 첨단로 242</div>' +
+//            '                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' +
+//            '                <div><a href="http://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' +
+//            '            </div>' +
+//            '        </div>' +
+//            '    </div>' +
+//            '</div>';
+//
+//var position = new kakao.maps.LatLng(37.7811132	,	128.9347671);
+//
+//var overlay = new kakao.maps.CustomOverlay({
+//    content: content,
+//    map: map,
+//    position: position
+//});
+//
+//// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+//kakao.maps.event.addListener(marker, 'click', function() {
+//    overlay.setMap(map);
+//});
+//
+//// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다
+//function closeOverlay() {
+//    overlay.setMap(null);
+//}
 
 
 marker.setMap(map);
+
 

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  {% load staticfiles %}
+  {% load static %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
@@ -42,11 +42,11 @@
             <a class="nav-link" href="{% url 'status' %}">확진자 현황</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'board.mask' %}">내 근처 진료소 찾기</a>
-          </li>
+<!--            <a class="nav-link" href="{% url 'board.mask' %}">내 근처 진료소 찾기</a>-->
+<!--          </li>-->
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'nearby.clinic' %}">마스크 좌표 공유 게시판</a>
-          </li>
+<!--            <a class="nav-link" href="{% url 'nearby.clinic' %}">마스크 좌표 공유 게시판</a>-->
+<!--          </li>-->
           <li class="nav-item">
             <a class="nav-link" href="{% url 'prevent' %}">코로나 예방 수칙</a>
           </li>
@@ -179,7 +179,7 @@
               </a>
             </li>
           </ul>
-          <p class="copyright text-muted">Copyright &copy; Your Website 2019</p>
+          <p class="copyright text-muted">제보 및 문의: ib7872@naver.com</p>
         </div>
       </div>
     </div>
