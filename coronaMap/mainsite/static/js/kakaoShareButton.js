@@ -21,14 +21,24 @@ function parseQuery ( query ) {
 }
 
 Kakao.init(params.api);
-
-// 카카오 로그인 버튼을 생성합니다.
-Kakao.Auth.createLoginButton({
-  container: '#kakao-login-btn',
-  success: function(authObj) {
-    alert(JSON.stringify(authObj));
+Kakao.Link.createDefaultButton({
+  container: '#kakao-link-btn',
+  objectType: 'feed',
+  content: {
+    title: 'CoronaMapGW',
+    description: '강원도 시군구별 코로나19 확진자 동선을 시각화한 사이트입니다. ',
+    imageUrl: '',
+    link: {
+      mobileWebUrl: 'http://coronamapgw.com'
+    }
   },
-  fail: function(err) {
-     alert(JSON.stringify(err));
-  }
+
+  buttons: [
+    {
+      title: '사이트 접속',
+      link: {
+        mobileWebUrl: 'http://coronamapgw.com'
+      }
+    }
+  ]
 });

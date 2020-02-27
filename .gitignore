@@ -127,10 +127,14 @@ venv.bak/
 dmypy.json
 
 # Pyre type checker
-.pyre/
+.pyre
 
 #pycham
 coronaMap/.idea
+
+#data
+data*.csv
+*.deb
 
 
 # log
