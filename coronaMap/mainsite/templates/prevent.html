@@ -102,39 +102,56 @@
 
   <hr>
 
-  <!-- Footer -->
-  <footer>
+ <footer>
+	  <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+
+	  <a id="kakao-link-btn" href="javascript:;">
+<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_small.png"/><font size="3">(카카오톡으로 공유)
+		 
+
+		  </a>
+
+
+		  <script type='text/javascript'>
+  //<![CDATA[
+    // // 사용할 앱의 JavaScript 키를 설정해 주세요.
+    Kakao.init('754fb9128b5e18c3f22b652f95ae05cc');
+    // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
+    Kakao.Link.createDefaultButton({
+      container: '#kakao-link-btn',
+      objectType: 'feed',
+      content: {
+        title: 'CoronaMapGW',
+        description: '강원도 시군구별 코로나19 확진자 동선을 시각화한 사이트입니다. ',
+        imageUrl: '',
+        link: {
+          mobileWebUrl: 'http://coronamapgw.com'
+        }
+      },
+
+      buttons: [
+        {
+          title: '사이트 접속',
+          link: {
+            mobileWebUrl: 'http://coronamapgw.com'
+          }
+        }
+      ]
+    });
+  //]]>
+</script>
+
+
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          <ul class="list-inline text-center">
-            <li class="list-inline-item">
-              <a href="#">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-          </ul>
+
           <p class="copyright text-muted">제보 및 문의: ib7872@naver.com</p>
-        </div>
+
+
+
+
+		  </div>
       </div>
     </div>
   </footer>
@@ -145,7 +162,13 @@
 
   <!-- Custom scripts for this template -->
   <script src="{% static 'js/clean-blog.min.js' %}"></script>
+	  
+  <script type="text/javascript" src="{% static 'js/link.js' %}"></script>
+
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=754fb9128b5e18c3f22b652f95ae05cc"></script>
+  <script type="text/javascript" src="{% static 'js/kakaoMap_dongsam.js' %}"></script>
 
 </body>
 
 </html>
+

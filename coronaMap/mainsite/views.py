@@ -16,10 +16,19 @@ def nearby_clinic(request):
 def prevent(request):
     return render(request, 'prevent.html')
 
-def mapTest(request):
-    return render(request, 'index.html')
 
 def mapTest2(request):
     return render(request, 'index3.html')
 
+def sokgo(request):
+    return render(request, 'sok_go.html')
+
+def dongsam(request):
+    return render(request, 'dong_sam.html')
+
+def gang(request):
+    return render(request, 'gang.html')
+
+def chun(request):
+    return render(request, 'chun.html')
 
