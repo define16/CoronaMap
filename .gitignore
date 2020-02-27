@@ -130,7 +130,7 @@ dmypy.json
 .pyre
 
 #pycham
-coronaMap/.idea
+.idea
 
 #data
 data*.csv
