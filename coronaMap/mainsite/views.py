@@ -1,14 +1,14 @@
 from django.shortcuts import render
 import json
+import os
 
 
-
-with open('/workspace/CoronaMap/init/apikey.json', 'r') as f:
+key_path = os.path.join( os.getcwd(), 'coronaMap' ,'init', 'conf', 'apikey.json')
+with open(key_path, 'r') as f:
     json_data = json.load(f)
 
 # kakao_api = json_data['kakao'] # 본 서버용
 kakao_api = json_data['kakao_test'] # 테스트용
-print (kakao_api)
 
 # Create your views here.
 def index(request):   

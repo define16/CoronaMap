@@ -133,9 +133,10 @@ dmypy.json
 .idea
 
 #data
-data*.csv
+*.csv
 *.deb
-
+dbkey.json
+*_initial.py
 
 # log
 coronaMap/logs/
