@@ -32,3 +32,9 @@ def gang(request):
 def chun(request):
     return render(request, 'chun.html')
 
+def wonju(request):
+    return render(request, 'wonju.html')
+
+def test(request):
+    return render(request, 'test.html')
+

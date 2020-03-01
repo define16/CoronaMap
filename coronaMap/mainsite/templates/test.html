@@ -97,16 +97,16 @@
               </div>
               <div class="dropdown">
                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      확진자 : 15명
+                      확진자 : 7명
                   </button>
 
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                       <a class="dropdown-item" href="{% url 'index' %}">모든 확진자</a>
-                      <a class="dropdown-item" href="{% url 'sokgo' %}">속초/고성(2명)</a>
-                      <a class="dropdown-item" href="{% url 'dongsam' %}">동해/삼척(1명)</a>
-                      <a class="dropdown-item" href="{% url 'gang' %}">강릉(5명)</a>
-                      <a class="dropdown-item" href="{% url 'chun' %}">춘천(2명)</a>
-					  <a class="dropdown-item" href="{% url 'wonju' %}">원주(5명)</a>
+                      <a class="dropdown-item" href="{% url 'sokgo' %}">속초/고성</a>
+                      <a class="dropdown-item" href="{% url 'dongsam' %}">동해/삼척</a>
+                      <a class="dropdown-item" href="{% url 'gang' %}">강릉</a>
+                      <a class="dropdown-item" href="{% url 'chun' %}">춘천</a>
+					  <a class="dropdown-item" href="{% url 'wonju' %}">원주</a>
                   </div>
               </div>
 
@@ -215,11 +215,8 @@
   <!-- Footer -->
   <footer>
 	  <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-
 	  <a id="kakao-link-btn" href="javascript:;">
 <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_small.png"/><font size="3">(카카오톡으로 공유)
-		 
-
 		  </a>
 
 
@@ -236,7 +233,7 @@
         description: '강원도 시군구별 코로나19 확진자 동선을 시각화한 사이트입니다. ',
         imageUrl: '',
         link: {
-          mobileWebUrl: 'coronamapgw.com'
+          mobileWebUrl: 'https://coronamapgw.com'
         }
       },
 
@@ -244,7 +241,7 @@
         {
           title: '사이트 접속',
           link: {
-            mobileWebUrl: 'coronamapgw.com'
+            mobileWebUrl: 'https://coronamapgw.com'
           }
         }
       ]
@@ -277,7 +274,7 @@
   <script type="text/javascript" src="{% static 'js/link.js' %}"></script>
 
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=754fb9128b5e18c3f22b652f95ae05cc"></script>
-  <script type="text/javascript" src="{% static 'js/kakaoMap_sokgo.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/test.js' %}"></script>
 
 </body>
 

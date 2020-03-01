@@ -61,7 +61,7 @@ function displayMarker(locPosition, message) {
 }
 
 var positions = [
-// 	1호환자(속초)
+// 	1호환자
     {
         content: '<div class ="label"><span class="left"></span><span class="center">애플24편의점아야진</span><span class="right"></span></div>',
         latlng: new kakao.maps.LatLng(38.2737631,	128.5554013)
@@ -90,7 +90,7 @@ var positions = [
         content: '<div class ="label"><span class="left"></span><span class="center">사랑약국</span><span class="right"></span></div>',
         latlng: new kakao.maps.LatLng(38.2071264,	128.5746114)
     },
-// 	2호환자(속초)
+// 	2호환자
 	 {
         content: '<div class ="label"><span class="left"></span><span class="center">자택 금호동</span><span class="right"></span></div>',
         latlng: new kakao.maps.LatLng(38.2068758	,	128.5881271)
@@ -143,7 +143,7 @@ var positions = [
         content: '<div class ="label"><span class="left"></span><span class="center">속초시보건소</span><span class="right"></span></div>',
         latlng: new kakao.maps.LatLng(38.1960432	,	128.5761283)
     },
-// 	3호환자(강릉)
+// 	3호환자
 	{
         content: '<div class ="label"><span class="left"></span><span class="center">자택 입암동</span><span class="right"></span></div>',
         latlng: new kakao.maps.LatLng(37.7553367	,	128.9152179)
@@ -156,7 +156,7 @@ var positions = [
         content: '<div class ="label"><span class="left"></span><span class="center">국군복지단 WA마트</span><span class="right"></span></div>',
         latlng: new kakao.maps.LatLng(37.7811132	,	128.9347671)
     },
-// 	4호환자(춘천)
+// 	4호환자
 	{
         content: '<div class ="label"><span class="left"></span><span class="center">신천지새명동센터</span><span class="right"></span></div>',
         latlng: new kakao.maps.LatLng(37.8797218	,	127.7293184)
@@ -169,7 +169,7 @@ var positions = [
         content: '<div class ="label"><span class="left"></span><span class="center">퇴계주공4차 정류장(1125)</span><span class="right"></span></div>',
         latlng: new kakao.maps.LatLng(37.8541466	,	127.7456576)
     },
-// 	5호환자(춘천)
+// 	5호환자
 	{
         content: '<div class ="label"><span class="left"></span><span class="center">춘천고속버스터미널</span><span class="right"></span></div>',
         latlng: new kakao.maps.LatLng(37.864655	,	127.717466)
@@ -195,7 +195,7 @@ var positions = [
         latlng: new kakao.maps.LatLng(37.8621999	,	127.7309406)
     },
 
-	// 	6호환자(삼척)
+	// 	6호환자
 	{
         content: '<div class ="label"><span class="left"></span><span class="center">삼척볼링센터</span><span class="right"></span></div>',
         latlng: new kakao.maps.LatLng(37.4402407	,	129.1674001)
@@ -301,7 +301,7 @@ var positions = [
         latlng: new kakao.maps.LatLng(37.4435721	,	129.1631689)
     },
 	
-	// 	7호환자(원주)
+	// 	7호환자
     {
         content: '<div class ="label"><span class="left"></span><span class="center">원주성지병원</span><span class="right"></span></div>',
         latlng: new kakao.maps.LatLng(37.3455286,	127.9520395)
@@ -343,231 +343,7 @@ var positions = [
         latlng: new kakao.maps.LatLng(37.3311766,	127.9233685)
     },
 
-	// 	8호환자(원주)
-	{	
-        content: '<div class ="label"><span class="left"></span><span class="center">자택</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.3498707,127.9186377)
-    },
-	{	
-        content: '<div class ="label"><span class="left"></span><span class="center">태장동학관예배당</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.382022, 127.945906)
-    },
-	{	
-        content: '<div class ="label"><span class="left"></span><span class="center">현대오일뱅크 동원셀프주유소 </span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.3296184,127.9431071)
-    },
-	{	
-        content: '<div class ="label"><span class="left"></span><span class="center">이마트24원주한라대점</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.3048583,127.9097637)
-    },
-	{	
-        content: '<div class ="label"><span class="left"></span><span class="center">단계동 원예하나로마트</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.3411342,127.9367515)
-    },
-	{	
-        content: '<div class ="label"><span class="left"></span><span class="center">단계동 플러스마트</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.3572039,127.9355961)
-    },
-	{	
-        content: '<div class ="label"><span class="left"></span><span class="center">현대오일뱅크 동원셀프주유소 </span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.3296184,127.9431071)
-    },
-	{	
-        content: '<div class ="label"><span class="left"></span><span class="center">버거킹 명륜오일DT점</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.3295598,127.945071)
-    },
-	{	
-        content: '<div class ="label"><span class="left"></span><span class="center">㈜대현유통문막하 주유소</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.3352824,127.8560758)
-    },
-	{	
-        content: '<div class ="label"><span class="left"></span><span class="center">차신웅 내과</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.3420299,127.9528855)
-    },
-	{	
-        content: '<div class ="label"><span class="left"></span><span class="center">단골약국</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.3421183,127.9529509)
-    },
-	{	
-        content: '<div class ="label"><span class="left"></span><span class="center">정지마을</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.3559008,127.9362945)
-    },
-	{	
-        content: '<div class ="label"><span class="left"></span><span class="center">원주의료원</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.3330109,127.9467181)
-    },
-	
-		// 	9호환자(강릉)
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">강릉아산병원</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.818247,128.8570832)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">가톨릭관동대 CU편의점</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.7362967,128.8718417)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">관동대학교 교직원식당, 관동대우체국, 가톨릭관동대 유니버스텔</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.7382873,128.8744725)
-    },
-	
-		// 	10호환자(강릉)
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">사천우체국</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.82331,128.8467418)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">사천농협</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.8235734,128.8471935)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">강릉아산병원</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.818247,128.8570832)
-    },
-	
-	//  11호환자(강릉)
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">내곡동주민센터</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.7389619,128.8787272)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">관동대학교 교직원식당, 관동대우체국, 가톨릭관동대 유니버스텔</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.7382873,128.8744725)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">강릉시청</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.7519781,128.8736411)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">회산동육반장</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.7400158,128.8649157)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">강릉시청</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.7519781,128.8736411)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">강릉아산병원</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.818247,128.8570832)
-    },
-	
-		//  12호환자
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">강릉아산병원</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.8182428	,	128.8592719)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">사천하나로마트</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.8245402	,	128.8495603)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">대은횟집</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.7654101	,	128.908181)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">삼보주유소</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.8374023	,	128.8443841)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">연곡종로약국</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.8596494	,	128.8370124)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">굽네치킨포남점</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.775386	,	128.9107572)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">강릉아산병원</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.8182428	,	128.8592719)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">백세약국</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.8183754	,	128.856158)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">강릉아산병원</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.8182428	,	128.8592719)
-    },
-	
-	//  13호환자
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">태장동학관예배당</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.382022	,	127.9481)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">토종추어탕</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.3850202	,	127.9773154)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">원주역</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.3566981	,	127.9457322)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">자택</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.3412674	,	128.0127368)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">SG마트</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.3427266	,	127.9844356)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">오토큐 신일자동차공업사</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.4176689	,	128.0167679)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">중앙동 제일은행</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.3489402	,	127.9514645)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">중앙동 국민은행</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.3500234	,	127.9507424)
-    },
 
-
-	//  14호환자
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">태장동학관예배당</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.382022	,	127.9481)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">자택</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.3722802	,	127.9344731)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">새원주해장국</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.3674092	,	127.9376725)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">종가집감자탕</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.3152512	,	127.9604368)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">원주원예농협(우산동)</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.3507455	,	127.9476315)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">자택</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.3722802	,	127.9344731)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">중앙시장</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.3500385	,	127.948753)
-    },
-	
-	//  15호환자
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">자택</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.3525786	,	127.9344104)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">원주축산농협하나로마트</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.3566673	,	127.9433233)
-    },
-	{
-        content: '<div class ="label"><span class="left"></span><span class="center">원예하나로마트(단계동),아리시장약국</span><span class="right"></span></div>',
-        latlng: new kakao.maps.LatLng(37.34113	,	127.9389402)
-    },
-	
 ];
 
 // 1번환자
@@ -741,186 +517,9 @@ var polyline = new kakao.maps.Polyline({
 });
 polyline.setMap(map);
 
-// 8번환자
-var pos_8 = [
-    new kakao.maps.LatLng(37.3498707,127.9186377),
-	new kakao.maps.LatLng(37.382022, 127.945906),
-	new kakao.maps.LatLng(37.3296184,127.9431071),
-	new kakao.maps.LatLng(37.3048583,127.9097637),
-	new kakao.maps.LatLng(37.3411342,127.9367515),
-	new kakao.maps.LatLng(37.3572039,127.9355961),
-	new kakao.maps.LatLng(37.3296184,127.9431071),
-	new kakao.maps.LatLng(37.3295598,127.945071),
-	new kakao.maps.LatLng(37.3352824,127.8560758),
-	new kakao.maps.LatLng(37.3420299,127.9528855),
-	new kakao.maps.LatLng(37.3421183,127.9529509),
-	new kakao.maps.LatLng(37.3559008,127.9362945),
-	new kakao.maps.LatLng(37.3330109,127.9467181)
-	
-];
 
 
-var polyline = new kakao.maps.Polyline({
-            path: pos_8, // 선을 구성하는 좌표배열 입니다
-            strokeWeight: 5, // 선의 두께 입니다
-            strokeColor: '#FF9300', // 선의 색깔입니다
-            strokeOpacity: 0.9, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-            strokeStyle: 'solid' // 선의 스타일입니다
-});
-polyline.setMap(map);
 
-// 9번환자
-var pos_9 = [
-    new kakao.maps.LatLng(37.818247,128.8570832),
-	new kakao.maps.LatLng(37.7362967,128.8718417),
-	new kakao.maps.LatLng(37.7382873,128.8744725)
-];
-
-
-var polyline = new kakao.maps.Polyline({
-            path: pos_9, // 선을 구성하는 좌표배열 입니다
-            strokeWeight: 5, // 선의 두께 입니다
-            strokeColor: '#327456', // 선의 색깔입니다
-            strokeOpacity: 0.9, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-            strokeStyle: 'solid' // 선의 스타일입니다
-});
-
-polyline.setMap(map);
-
-// 10번환자
-var pos_10 = [
-    new kakao.maps.LatLng(37.82331,128.8467418),
-	new kakao.maps.LatLng(37.8235734,128.8471935),
-	new kakao.maps.LatLng(37.818247,128.8570832)
-];
-
-
-var polyline = new kakao.maps.Polyline({
-            path: pos_10, // 선을 구성하는 좌표배열 입니다
-            strokeWeight: 5, // 선의 두께 입니다
-            strokeColor: '#FF73FF', // 선의 색깔입니다
-            strokeOpacity: 0.9, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-            strokeStyle: 'solid' // 선의 스타일입니다
-});
-
-polyline.setMap(map);
-
-// 11번환자
-var pos_11 = [
-    new kakao.maps.LatLng(37.7389619,128.8787272),
-	new kakao.maps.LatLng(37.7382873,128.8744725),
-	new kakao.maps.LatLng(37.7519781,128.8736411),
-	new kakao.maps.LatLng(37.7400158,128.8649157),
-	new kakao.maps.LatLng(37.7382873,128.8744725),
-	new kakao.maps.LatLng(37.7519781,128.8736411),
-	new kakao.maps.LatLng(37.818247,128.8570832)
-	
-];
-
-
-var polyline = new kakao.maps.Polyline({
-            path: pos_11, // 선을 구성하는 좌표배열 입니다
-            strokeWeight: 5, // 선의 두께 입니다
-            strokeColor: '#FFD9CB', // 선의 색깔입니다
-            strokeOpacity: 0.9, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-            strokeStyle: 'solid' // 선의 스타일입니다
-});
-
-polyline.setMap(map);
-
-// 12번환자
-var pos_12 = [
-    new kakao.maps.LatLng(37.8182428	,	128.8592719),
-	new kakao.maps.LatLng(37.8245402	,	128.8495603),
-	new kakao.maps.LatLng(37.7654101	,	128.908181),
-	new kakao.maps.LatLng(37.8374023	,	128.8443841),
-	new kakao.maps.LatLng(37.8596494	,	128.8370124),
-	new kakao.maps.LatLng(37.775386	,	128.9107572),
-	new kakao.maps.LatLng(37.8182428	,	128.8592719),
-	new kakao.maps.LatLng(37.8183754	,	128.856158),
-	new kakao.maps.LatLng(37.8182428	,	128.8592719)
-	
-];
-
-
-var polyline = new kakao.maps.Polyline({
-            path: pos_12, // 선을 구성하는 좌표배열 입니다
-            strokeWeight: 5, // 선의 두께 입니다
-            strokeColor: '#192553', // 선의 색깔입니다
-            strokeOpacity: 0.9, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-            strokeStyle: 'solid' // 선의 스타일입니다
-});
-
-polyline.setMap(map);
-
-// 13번환자
-var pos_13 = [
-    new kakao.maps.LatLng(37.382022	,	127.9481),
-	new kakao.maps.LatLng(37.3850202	,	127.9773154),
-	new kakao.maps.LatLng(37.3566981	,	127.9457322),
-	new kakao.maps.LatLng(37.3412674	,	128.0127368),
-	new kakao.maps.LatLng(37.3427266	,	127.9844356),
-	new kakao.maps.LatLng(37.4176689	,	128.0167679),
-	new kakao.maps.LatLng(37.3489402	,	127.9514645),
-	new kakao.maps.LatLng(37.3500234	,	127.9507424)
-
-	
-];
-
-
-var polyline = new kakao.maps.Polyline({
-            path: pos_13, // 선을 구성하는 좌표배열 입니다
-            strokeWeight: 5, // 선의 두께 입니다
-            strokeColor: '#929000', // 선의 색깔입니다
-            strokeOpacity: 0.9, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-            strokeStyle: 'solid' // 선의 스타일입니다
-});
-
-polyline.setMap(map);
-
-// 14번환자
-var pos_14 = [
-    new kakao.maps.LatLng(37.382022	,	127.9481),
-	new kakao.maps.LatLng(37.3722802	,	127.9344731),
-	new kakao.maps.LatLng(37.3674092	,	127.9376725),
-	new kakao.maps.LatLng(37.3152512	,	127.9604368),
-	new kakao.maps.LatLng(37.3507455	,	127.9476315),
-	new kakao.maps.LatLng(37.3722802	,	127.9344731),
-	new kakao.maps.LatLng(37.3500385	,	127.948753)
-
-	
-];
-
-
-var polyline = new kakao.maps.Polyline({
-            path: pos_14, // 선을 구성하는 좌표배열 입니다
-            strokeWeight: 5, // 선의 두께 입니다
-            strokeColor: '#3D9284', // 선의 색깔입니다
-            strokeOpacity: 0.9, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-            strokeStyle: 'solid' // 선의 스타일입니다
-});
-
-polyline.setMap(map);
-
-// 15번환자
-var pos_15 = [
-    new kakao.maps.LatLng(37.3525786	,	127.9344104),
-	new kakao.maps.LatLng(37.3566673	,	127.9433233),
-	new kakao.maps.LatLng(37.34113	,	127.9389402),
-
-	
-];
-
-
-var polyline = new kakao.maps.Polyline({
-            path: pos_15, // 선을 구성하는 좌표배열 입니다
-            strokeWeight: 5, // 선의 두께 입니다
-            strokeColor: '#931755', // 선의 색깔입니다
-            strokeOpacity: 0.9, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-            strokeStyle: 'solid' // 선의 스타일입니다
-});
-
-polyline.setMap(map);
 
 for (var i = 0; i < positions.length; i ++) {
     // 마커를 생성합니다

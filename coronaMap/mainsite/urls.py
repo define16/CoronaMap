@@ -1,5 +1,5 @@
 from django.urls import path
-
+from django.views.generic import TemplateView
 from . import views
 
 urlpatterns = [
@@ -14,4 +14,8 @@ urlpatterns = [
 	path('dongsam', views.dongsam, name='dongsam'),
 	path('gang', views.gang, name='gang'),
 	path('chun', views.chun, name='chun'),
+	path('wonju', views.wonju, name='wonju'),
+	path('test', views.test, name='test'),
+	path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type="text/plain"), name="project_robots_file")
+
 ]

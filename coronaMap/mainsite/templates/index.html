@@ -5,10 +5,12 @@
   {% load static %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <meta name="keyword" content="코로나맵,코로나맵강원,코로나확진자,코로나19,coronamap">
+  <meta name="description" content="코로나맵강원, 강원도 시군별 코로나19 확진자 동선을 시각화한 사이트입니다.">
+  <meta name="google-site-verification" content="d_DrR6BykquUTjjvqSVIPxlit8jYiK3FlbIVjysxP3A" />
+  <meta name="naver-site-verification" content="b00a2379d616989fccb8197198aa7899654e28a0"/>
 
-  <title>CoronaMapGW</title>
+  <title>코로나맵강원</title>
 	
  <style>
 .label {margin-bottom: 96px;}
@@ -97,15 +99,16 @@
               </div>
               <div class="dropdown">
                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      확진자 : 6명
+                      확진자 : 15명
                   </button>
 
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                       <a class="dropdown-item" href="{% url 'index' %}">모든 확진자</a>
-                      <a class="dropdown-item" href="{% url 'sokgo' %}">속초/고성</a>
-                      <a class="dropdown-item" href="{% url 'dongsam' %}">동해/삼척</a>
-                      <a class="dropdown-item" href="{% url 'gang' %}">강릉</a>
-                      <a class="dropdown-item" href="{% url 'chun' %}">춘천</a>
+                      <a class="dropdown-item" href="{% url 'sokgo' %}">속초/고성(2명)</a>
+                      <a class="dropdown-item" href="{% url 'dongsam' %}">동해/삼척(1명)</a>
+                      <a class="dropdown-item" href="{% url 'gang' %}">강릉(5명)</a>
+                      <a class="dropdown-item" href="{% url 'chun' %}">춘천(2명)</a>
+					  <a class="dropdown-item" href="{% url 'wonju' %}">원주(5명)</a>
                   </div>
               </div>
 
