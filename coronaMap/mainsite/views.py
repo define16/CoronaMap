@@ -42,3 +42,17 @@ def gang(request):
 def chun(request):
     return render(request, 'chun.html')
 
+
+# ssl 인증
+def ssl(request):
+    path = search()[1]
+    f = open(path,'r')
+    txt = f.readline()
+    return HttpResponse(txt)
+
+def search():
+    dirname = os.path.join(os.getcwd(),'mainsite','.well-known/acme-challenge')
+    filenames = os.listdir(dirname)
+    full_filename = os.path.join(dirname, filenames[0])
+    urlname = '.well-known/acme-challenge/' + filenames[0]
+    return urlname, full_filename
