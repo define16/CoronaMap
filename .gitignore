@@ -135,10 +135,10 @@ dmypy.json
 #data
 *.csv
 *.deb
-dbkey.json
 *_initial.py
 
 # key
+dbkey.json
 *.cert
 *.key
 
