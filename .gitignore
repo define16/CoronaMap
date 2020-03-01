@@ -138,6 +138,10 @@ dmypy.json
 dbkey.json
 *_initial.py
 
+# key
+*.cert
+*.key
+
 # log
 coronaMap/logs/
 coronaMap/nohup.out
