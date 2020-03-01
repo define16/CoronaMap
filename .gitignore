@@ -141,6 +141,7 @@ dmypy.json
 dbkey.json
 *.cert
 *.key
+*/mainsite/.well-known/*
 
 # log
 coronaMap/logs/
