@@ -43,13 +43,14 @@ def chun(request):
     return render(request, 'chun.html')
 
 
-# ssl 인증
+# ssl 인증용
 def ssl(request):
     path = search()[1]
     f = open(path,'r')
     txt = f.readline()
     return HttpResponse(txt)
 
+# ssl 인증용
 def search():
     dirname = os.path.join(os.getcwd(),'mainsite','.well-known/acme-challenge')
     filenames = os.listdir(dirname)
