@@ -13,6 +13,6 @@ urlpatterns = [
 	path('sokgo', views.sokgo, name='sokgo'),
 	path('dongsam', views.dongsam, name='dongsam'),
 	path('gang', views.gang, name='gang'),
-	path('chun', views.chun, name='chun'),
+	path('chun', views.chun, name='chun')
 	# path(views.search()[0], views.ssl, name=views.search()[0]) # ssl 인증
 ]

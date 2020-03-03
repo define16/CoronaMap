@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse
 import json
 import os
-
+from .models import InfectedPeople
 
 key_path = os.path.join( os.getcwd(), 'coronaMap' ,'init', 'conf', 'apikey.json')
 with open(key_path, 'r') as f:
@@ -11,8 +11,9 @@ with open(key_path, 'r') as f:
 kakao_api = json_data['kakao_test'] # 테스트용
 
 # Create your views here.
-def index(request):   
-    return render(request, 'index.html', {'api_key' : kakao_api})
+def index(request):
+    results = InfectedPeople.objects.all().order_by('id') # -는 내림차순
+    return render(request, 'index.html', {'api_key' : kakao_api, 'results' : results})
 
 def status(request):
     return render(request, 'status.html')
