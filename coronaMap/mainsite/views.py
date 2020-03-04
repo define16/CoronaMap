@@ -12,6 +12,11 @@ kakao_api = json_data['kakao_test'] # 테스트용
 
 # Create your views here.
 def index(request):
+    """
+    TODO : 확진자 명수, 카테고리별로 확진자 그룹핑 로직 추가
+    데이터베이스 컬럼에 날짜, 색 추가
+    데이터베이스에 색추가시 색을 랜덤 지정 후 저장
+    """
     results = InfectedPeople.objects.all().order_by('id') # -는 내림차순
     return render(request, 'index.html', {'api_key' : kakao_api, 'results' : results})
 
