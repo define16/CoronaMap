@@ -121,10 +121,13 @@ class DjangoSession(models.Model):
 
 class InfectedPeople(models.Model):
     person_num = models.PositiveIntegerField()
+    region = models.CharField(max_length=50)
+    visited_date = models.PositiveIntegerField()
     place = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
     latitude = models.CharField(max_length=20)
     longitude = models.CharField(max_length=20)
+    transportation = models.CharField(max_length=6)
 
     class Meta:
         managed = False

@@ -18,10 +18,12 @@ def insert_data(data, data_size):
     try:
         progressbar: int = 0
         for line in data:
+            progressbar += 1;
             if (line[0].isdigit()):
-                sql = "INSERT INTO infected_people (person_num, place, address, latitude, longitude) VALUES(%s, %s, %s, %s, %s)"
+                sql = "INSERT INTO infected_people (person_num, region, visited_date, place, address, latitude, longitude, transportation) VALUES(%s, %s, %s, %s, %s, %s, %s, %s)"
                 cursor.execute(sql, tuple(line))
-                progressbar += 1;
+                # print(sql, tuple(line))
+
                 print("Inserting (%d%%): [%d / %d] " % (progressbar/data_size * 100, progressbar, data_size))
         db.commit()
 
