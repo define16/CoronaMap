@@ -31,6 +31,9 @@ def index(request):
     spot_cnt:int = 0
     person_map = {}
 
+    check_date: int = 0
+    change_date:int = 0
+
     results = InfectedPeople.objects.all().order_by('id') # -는 내림차순
 
     for result in results:
@@ -45,33 +48,39 @@ def index(request):
                 color = colour_template.get(tmp_transportation)
             else :
                 color = BLACK
+            if int(result.visited_date) != check_date :
+                change_date = 1 # 날짜가 바뀌었을 때
+            else :
+                change_date = 0; # 날짜가 안 바뀌었을 때(즉, 같은날 이동)
             spot_map = {'person_num' : result.person_num, 'region': result.region ,'visited_date': result.visited_date,'address': result.address,'place': result.place,
-                        'latitude': result.latitude,'longitude': result.longitude,'transportation': result.transportation,'color': color}
+                        'latitude': result.latitude,'longitude': result.longitude,'transportation': result.transportation,'color': color, 'change_date' : change_date}
             person_map[str(spot_cnt)] = spot_map
             spot_cnt+=1
+            check_date = result.visited_date
 
         total_person_num = result.person_num
         total_spot_cnt += 1
 
     total_person_cnt = len(results_map)
 
-    # print(total_person_cnt)
-    # for key in results_map :
-    #     results = results_map.get(key)
-    #     print(key)
-    #     print(results)
-        # print(results_map.get(key).get("spot_cnt"))
-        # for result in results.values():
-        #     print("person_num : " + str(result.get("person_num")))
-        #     print("region : " + result.get("region"))
-        #     print("visited_date : " + str(result.get("visited_date")))
-        #     print("address : " + result.get("address"))
-        #     print("place : " + result.get("place"))
-        #     print("latitude : " + result.get("latitude"))
-        #     print("longitude : " + result.get("longitude"))
-        #     print("transportation : " + result.get("transportation"))
-        #     print("color : " + result.get("color"))
-        #     print()
+    print(total_person_cnt)
+    for key in results_map :
+        results = results_map.get(key)
+        print(key)
+        print(results)
+        print(results_map.get(key).get("spot_cnt"))
+        for result in results.values():
+            print("person_num : " + str(result.get("person_num")))
+            # print("region : " + result.get("region"))
+            print("visited_date : " + str(result.get("visited_date")))
+            # print("address : " + result.get("address"))
+            # print("place : " + result.get("place"))
+            # print("latitude : " + result.get("latitude"))
+            # print("longitude : " + result.get("longitude"))
+            # print("transportation : " + result.get("transportation"))
+            # print("color : " + result.get("color"))
+            print("change_date : " + str(result.get("change_date")))
+            print()
 
 
 

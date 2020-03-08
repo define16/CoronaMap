@@ -259,14 +259,16 @@
         {% for key,result in results_map.items %}
         var {{key}} = {
             {% for idx, person in result.items %}
-            {{idx}}
-            {% if idx == "0" %}
-            {{person.person_num}}:[new kakao.maps.LatLng({{person.latitude}}, {{person.longitude}})
+            {% if person.change_date == 1 %}
+            {% if idx != "0" %}
+            ],
+            {% endif %}
+            {{person.visited_date}}:[new kakao.maps.LatLng({{person.latitude}}, {{person.longitude}})
             {% else %}
             ,new kakao.maps.LatLng({{person.latitude}}, {{person.longitude}})
             {% endif %}
             {% endfor %}
-            ],
+            ]
         }
 
 
@@ -274,7 +276,7 @@
             var polyline = new kakao.maps.Polyline({
                     path: {{key}}[key], // 선을 구성하는 좌표배열 입니다
                     strokeWeight: 5, // 선의 두께 입니다
-                    strokeColor: {{result.color}}, // 선의 색깔입니다
+                    strokeColor: "{{result.color}}", // 선의 색깔입니다
                     strokeOpacity: 0.9, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
                     strokeStyle: 'solid' // 선의 스타일입니다
             });
