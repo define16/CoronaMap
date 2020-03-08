@@ -20,27 +20,26 @@ kakao_api = json_data['kakao_test'] # 테스트용
 def index(request):
     """
     TODO : 확진자 명수, 카테고리별로 확진자 그룹핑 로직 추가
-    날짜별로 이동경로 만들기. (새로운 list 만들어서 구분 넣기. 날짜가 바뀔때만 1을 삽입. 아닌 경우 0을 삽입)
-
+    날짜별,교통수단별 이동경로에 색깔 적용하기 (새로운 map인 results_transportation을 추가로 만들어서 넘기기.)
     """
     colour_template = {"자차" : GREEN, "도보" : YELLOW, "대중교통" : RED}
-
     results_map = {}
+    person_map = {}
     total_person_num: int = 1
     total_spot_cnt: int = 1
     spot_cnt:int = 0
-    person_map = {}
-
     check_date: int = 0
     change_date:int = 0
 
-    results = InfectedPeople.objects.all().order_by('id') # -는 내림차순
+    results_transportation = {}
+    separation_by_transport = {}
 
+    results = InfectedPeople.objects.all().order_by('id') # -는 내림차순
+    # 커스텀 오버레이, 날짜별 방문 장소를 분리
     for result in results:
         if result.person_num != total_person_num or len(results) == total_spot_cnt:
             results_map["person_" + str(total_person_num)] = person_map
             spot_cnt = 0
-
 
         if result.person_num == total_person_num :
             tmp_transportation = result.transportation
@@ -63,28 +62,40 @@ def index(request):
 
     total_person_cnt = len(results_map)
 
-    print(total_person_cnt)
-    for key in results_map :
-        results = results_map.get(key)
+    # 날짜-이동수단별 분리
+    for key,results in results_map.items():
         print(key)
         print(results)
-        print(results_map.get(key).get("spot_cnt"))
+        date_tmp = 0;
         for result in results.values():
-            print("person_num : " + str(result.get("person_num")))
-            # print("region : " + result.get("region"))
-            print("visited_date : " + str(result.get("visited_date")))
-            # print("address : " + result.get("address"))
-            # print("place : " + result.get("place"))
-            # print("latitude : " + result.get("latitude"))
-            # print("longitude : " + result.get("longitude"))
-            # print("transportation : " + result.get("transportation"))
-            # print("color : " + result.get("color"))
-            print("change_date : " + str(result.get("change_date")))
-            print()
+            if result.get("visited_date") == date_tmp:
+                pass
+            else:
+                pass
+            date_tmp = result.get("visited_date")
+
+
+    # print(total_person_cnt)
+    # for key,results in results_map.items() :
+    #     print(key)
+    #     print(results)
+    #     for result in results.values():
+    #         print("person_num : " + str(result.get("person_num")))
+    #         print("region : " + result.get("region"))
+    #         print("visited_date : " + str(result.get("visited_date")))
+    #         print("address : " + result.get("address"))
+    #         print("place : " + result.get("place"))
+    #         print("latitude : " + result.get("latitude"))
+    #         print("longitude : " + result.get("longitude"))
+    #         print("transportation : " + result.get("transportation"))
+    #         print("color : " + result.get("color"))
+    #         print("change_date : " + str(result.get("change_date")))
+    #         print()
 
 
 
-    return render(request, 'index.html', {'api_key' : kakao_api, 'total_person_cnt' : total_person_cnt ,  'results_map' : results_map})
+    return render(request, 'index.html', {'api_key' : kakao_api, 'total_person_cnt' : total_person_cnt ,  'results_map'
+    : results_map})
 
 def status(request):
     return render(request, 'status.html')
