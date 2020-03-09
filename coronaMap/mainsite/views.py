@@ -40,6 +40,7 @@ def index(request):
         if result.person_num != total_person_num or len(results) == total_spot_cnt:
             results_map["person_" + str(total_person_num)] = person_map
             spot_cnt = 0
+            person_map = {}
 
         if result.person_num == total_person_num :
             tmp_transportation = result.transportation
@@ -62,14 +63,42 @@ def index(request):
 
     total_person_cnt = len(results_map)
 
+
     # 날짜-이동수단별 분리
-    for key,results in results_map.items():
-        print(key)
-        print(results)
+    for key,results in results_map.items(): # 사람별
         date_tmp = 0;
-        for result in results.values():
-            if result.get("visited_date") == date_tmp:
-                pass
+        transport_tmp = ""
+        latitude_before = ""
+        longitude_before = ""
+        path_map = {}
+        transport_map = {}
+        date_map = {}
+        person_transport_map = {}
+        transport_idx = 0;
+        date_idx = 0;
+        path_idx = 0;
+        for result in results.values(): # 날짜 + 이동수단
+            print(result)
+            if result.get("visited_date") == date_tmp: # 날짜별
+                if transport_tmp == "" :
+                    latitude_before = result.get("latitude")
+                    longitude_before = result.get("longitude")
+                    spot_map = {"latitude": result.get("latitude"), "longitude": result.get("longitude")}
+                    path_map[str(path_idx)] = spot_map
+                    path_idx += 1
+                elif result.get("transportation") == transport_tmp : # 이동수단별
+                    latitude_before = result.get("latitude")
+                    longitude_before = result.get("longitude")
+                    spot_map = {"latitude": result.get("latitude"), "longitude": result.get("longitude")}
+                    path_map[str(path_idx)] = spot_map
+                    path_idx += 1
+                else :
+                    spot_map = {"latitude": latitude_before, "longitude": longitude_before}
+                    path_map[str(path_idx)] = spot_map
+                    path_idx += 1
+                    spot_map = {"latitude": result.get("latitude"), "longitude": result.get("longitude")}
+                    path_map[str(path_idx)] = spot_map
+                    path_idx += 1
             else:
                 pass
             date_tmp = result.get("visited_date")
