@@ -256,32 +256,31 @@
             circleoverlay.setMap(map);
         }
 
-        {% for key,result in results_map.items %}
-        var {{key}} = {
-            {% for idx, person in result.items %}
-            {% if person.change_date == 1 %}
-            {% if idx != "0" %}
-            ],
-            {% endif %}
-            {{person.visited_date}}:[new kakao.maps.LatLng({{person.latitude}}, {{person.longitude}})
-            {% else %}
-            ,new kakao.maps.LatLng({{person.latitude}}, {{person.longitude}})
-            {% endif %}
-            {% endfor %}
-            ]
+        {% for key,results in results_transportation_map.items %}
+        {% for date, result in results.items %}
+        var {{key}}_{{date}} = {{% for transport_idx, path in result.items %}
+            {{transport_idx}}:{% for idx, spot in path.items %}{% if idx == "0" %}[new kakao.maps.LatLng({{spot.latitude}}, {{spot.longitude}})
+            {% else %},new kakao.maps.LatLng({{spot.latitude}}, {{spot.longitude}}){% endif %}{% endfor %}],{% endfor %}
         }
 
+        var color_list_{{date}} = {{% for transport_idx, path in result.items %}
+            {{transport_idx}}:{% for idx, spot in path.items %}{% if idx == "0" %}["{{spot.color}}"
+            {% else %},"{{spot.color}}"{% endif %}{% endfor %}],{% endfor %}
+        }
 
-        for (var key in {{key}}) {
+        console.log(color_list_{{date}}[transport0][0]) // TODO : 수정
+
+        for (var key in {{key}}_{{date}}) {
             var polyline = new kakao.maps.Polyline({
-                    path: {{key}}[key], // 선을 구성하는 좌표배열 입니다
+                    path: {{key}}_{{date}}[key], // 선을 구성하는 좌표배열 입니다
                     strokeWeight: 5, // 선의 두께 입니다
-                    strokeColor: "{{result.color}}", // 선의 색깔입니다
+                    strokeColor: color_list_{{date}}[key][0], // 선의 색깔입니다
                     strokeOpacity: 0.9, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
                     strokeStyle: 'solid' // 선의 스타일입니다
             });
             polyline.setMap(map);
         }
+        {% endfor %}
         {% endfor %}
 
     </script>
