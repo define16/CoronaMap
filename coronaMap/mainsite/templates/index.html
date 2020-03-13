@@ -268,7 +268,7 @@
             {% else %},"{{spot.color}}"{% endif %}{% endfor %}],{% endfor %}
         }
 
-        console.log(color_list_{{date}}[transport0][0]) // TODO : 수정
+        // console.log(color_list_{{date}}["transport0"][0]) // TODO : 수정
 
         for (var key in {{key}}_{{date}}) {
             var polyline = new kakao.maps.Polyline({
