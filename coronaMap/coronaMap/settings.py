@@ -74,7 +74,7 @@ WSGI_APPLICATION = 'coronaMap.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-key_path = os.path.join(os.getcwd(), 'coronaMap' ,'init', 'conf', 'dbkey.json')
+key_path = os.path.join(os.getcwd(), 'coronaMap' , 'conf', 'dbkey.json')
 with open(key_path, 'r') as f:
     json_data = json.load(f)
 

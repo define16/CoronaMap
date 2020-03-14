@@ -64,22 +64,6 @@
     </div>
   </nav>
 
-  <!-- Page Header -->
-  <!--
-  <header class="masthead" style="background-image: url({% static 'img/home-bg.jpg' %})">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="site-heading">
-            <h1>Clean Blog</h1>
-            <span class="subheading">A Blog Theme by Start Bootstrap</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-  -->
     <header class="masthead">
     <div class="overlay"></div>
     <div class="container">
@@ -113,35 +97,15 @@
               <!-- Kakao Map -->
               <div id="mapwrap">
               <!-- 지도가 표시될 div -->
-              <div id="map" style="width:100%;height:400px;"></div>
+                  <div id="map" style="width:100%;height:400px;">
+                  </div>
+              </div>
           </a>
       </div>
     </div>
 
   </div>
-<!-- <h1>aaa</h1>-->
-<!--  <table>-->
-<!--  {% for result in results %}-->
-<!--  <tr>-->
-<!--      <td>-->
-<!--          {{result.person_num}}-->
-<!--      </td>-->
-<!--      <td>-->
-<!--          {{result.place}}-->
-<!--      </td>-->
-<!--      <td>-->
-<!--          {{result.address}}-->
-<!--      </td>-->
-<!--      <td>-->
-<!--          {{result.latitude}}-->
-<!--      </td>-->
-<!--      <td>-->
-<!--          {{result.longitude}}-->
-<!--      </td>-->
-<!--  </tr>-->
-<!--  {% endfor %}-->
-<!--</table>-->
-<!--  <h1>aaa</h1>-->
+
   <hr>
 
   <!-- Footer -->
@@ -154,17 +118,12 @@
             <p>
                 <a class="nomal_text" id="kakao-link-btn" href="javascript:;" style="text-decoration:none;font-family:Open Sans,Helvetica Neue">
                     <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_small.png"/>
-                    <font size="3"> 카카오톡으로 공유
+                    <font size="3"/> 카카오톡으로 공유
                 </a>
              </p>
             </div>
         </div>
     </div>
-
-
-    <script type='text/javascript'>
-</script>
-
 
     <div class="container">
       <div class="row">
@@ -194,7 +153,7 @@
     <script type="text/javascript">
         var mapContainer = document.getElementById('map'), // 지도의 중심좌표
             mapOption = {
-                center: new kakao.maps.LatLng(37.8791271	,	127.7289193), // 지도의 중심좌표
+                center: new kakao.maps.LatLng(37.885397	,	127.729773), // 지도의 중심좌표
                 level: 12 // 지도의 확대 레벨
             };
 
@@ -218,7 +177,7 @@
                     '        </div>' +
                     '        <div class="body">' +
                     '            <div class="img">' +
-                    '                 {{person.region}}{{person.person_num}}'+
+                    '                 {{person.region}}{{person.region_id}}'+
                     '           </div>' +
                     '            <div class="desc">' +
                     '                <div class="ellipsis">이동수단: {{person.transportation}}</div>' + //최대 8글자
@@ -228,7 +187,7 @@
                     '    </div>' +
                     '</div>',
                     latlng:
-                    new kakao.maps.LatLng({{person.latitude}},	{{person.longitude}}),
+                    new kakao.maps.LatLng({{person.latitude}}, {{person.longitude}}),
 
                     imageSrc :
                     '<div class="circle">{{person.person_num}}</div>'
@@ -267,8 +226,6 @@
             {{transport_idx}}:{% for idx, spot in path.items %}{% if idx == "0" %}["{{spot.color}}"
             {% else %},"{{spot.color}}"{% endif %}{% endfor %}],{% endfor %}
         }
-
-        console.log(color_list_{{date}}["transport0"][0]) // TODO : 수정
 
         for (var key in {{key}}_{{date}}) {
             var polyline = new kakao.maps.Polyline({

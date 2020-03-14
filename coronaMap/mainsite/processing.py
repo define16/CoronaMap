@@ -19,7 +19,6 @@ class DataProcessing():
         spot_cnt:int = 0
         check_date: int = 0
 
-
         for result in results:
             if result.person_num != check_person_num or len(results) == total_spot_cnt: # 사람별로 구분
                 results_dic["person_" + str(check_person_num)] = person_dic
@@ -32,10 +31,10 @@ class DataProcessing():
                 change_date = 1 # 날짜가 바뀌었을 때
             else :
                 change_date = 0; # 날짜가 안 바뀌었을 때(즉, 같은날 이동)
-            spot_dic = {'person_num' : result.person_num, 'region': result.region ,'visited_date': result.visited_date,
-                        'address': result.address,'place': result.place, 'latitude': result.latitude,
-                        'longitude': result.longitude,'transportation': result.transportation,'color': color,
-                        'change_date' : change_date}
+            spot_dic = {'person_num' : result.person_num, 'region': result.region ,'region_id': result.region_id ,
+                        'visited_date': result.visited_date, 'address': result.address,'place': result.place,
+                        'latitude': result.latitude, 'longitude': result.longitude,
+                        'transportation': result.transportation,'color': color, 'change_date' : change_date}
             person_dic[str(spot_cnt)] = spot_dic
             spot_cnt+=1
             check_date = result.visited_date
@@ -50,7 +49,6 @@ class DataProcessing():
         """
         results_transportation_dic = {}
         for key, results in results_dic.items():  # 사람별로 구분
-            print("Start : ", key)
             date_tmp = 0;
             transport_tmp = ""
             latitude_before = ""
