@@ -218,7 +218,7 @@
                     '        </div>' +
                     '        <div class="body">' +
                     '            <div class="img">' +
-                    '                 {{value.person_num.idx}}'+
+                    '                 {{person.region}}{{person.person_num}}'+
                     '           </div>' +
                     '            <div class="desc">' +
                     '                <div class="ellipsis">이동수단: {{person.transportation}}</div>' + //최대 8글자
@@ -231,7 +231,7 @@
                     new kakao.maps.LatLng({{person.latitude}},	{{person.longitude}}),
 
                     imageSrc :
-                    '<div class="circle">10</div>'
+                    '<div class="circle">{{person.person_num}}</div>'
                     },
                 {% endfor %}
                 {% endfor %}
@@ -268,7 +268,7 @@
             {% else %},"{{spot.color}}"{% endif %}{% endfor %}],{% endfor %}
         }
 
-        // console.log(color_list_{{date}}["transport0"][0]) // TODO : 수정
+        console.log(color_list_{{date}}["transport0"][0]) // TODO : 수정
 
         for (var key in {{key}}_{{date}}) {
             var polyline = new kakao.maps.Polyline({

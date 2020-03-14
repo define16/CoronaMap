@@ -6,7 +6,7 @@ import pymysql;
 
 def init():
     global db, cursor;
-    path = os.path.join(os.path.abspath("../"), 'conf','dbkey.json')
+    path = os.path.join(os.path.abspath("../coronaMap/init/"), 'conf', 'dbkey.json')
     with open(path, 'r') as f:
         json_data = json.load(f)
     mariadb = json_data['mariadb']  # 테스트용
@@ -31,7 +31,7 @@ def insert_data(data, data_size):
         db.close();
 
 # 파일명을 인자 값에서 가지고 온다.
-path = os.path.join(os.path.abspath("../../../"), 'data', str(sys.argv[1]))
+path = os.path.join(os.path.abspath("../"), 'data', str(sys.argv[1]))
 print(path)
 init()
 f = open(path, 'r', encoding='utf-8')
