@@ -17,6 +17,8 @@
 .label .center {background: url(http://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_bg.png) repeat-x;display: inline-block;height: 24px;font-size: 12px;line-height: 24px;}
 .label .right {background: url("http://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_r.png") -1px 0  no-repeat;display: inline-block;height: 24px;overflow: hidden;width: 6px;}
 </style>
+    
+    <link rel="preload" href="{% static 'css/kakaoMap.css' %}" as="style" crossorigin="crossorigin"> 
   
 	<!-- Bootstrap core CSS -->
   <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -95,6 +97,10 @@
 
           <a>
               <!-- Kakao Map -->
+               <div style="position:absolute; right:20px;">
+                    <div style="float:right;position: relative;z-index: 3; top: 5px; "><img src={% static 'img/aa.png' %} style="max-width:100%;height:100px;"></img>
+                    </div>
+                </div>
               <div id="mapwrap">
               <!-- 지도가 표시될 div -->
                   <div id="map" style="width:100%;height:400px;">
@@ -146,7 +152,7 @@
   <!-- Custom scripts for this template -->
   <script src="{% static 'js/clean-blog.min.js' %}"></script>
 
-  <script type="text/javascript" src="{% static 'js/link.js' %}?api={{api_key}}"></script>
+  <!-- <script type="text/javascript" src="{% static 'js/link.js' %}?api={{api_key}}"></script> -->
 
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey={{api_key}}"></script>
     <!--  <script type="text/javascript" src="{% static 'js/kakaoMap3.js' %}"></script>-->
@@ -168,8 +174,10 @@
         var position = [
                 {% for result in results_map.values %}
                 {% for person in result.values %}
+
                     {
                     content :
+            '<div class ="label"><span class="left"></span><span class="center">{{person.place}}</span><span class="right"></span></div>' +
                     '<div class="wrap">' +
                     '    <div class="info">' +
                     '        <div class="title">' +
@@ -185,18 +193,21 @@
                     '            </div>' +
                     '        </div>' +
                     '    </div>' +
-                    '</div>',
+                    '</div>' +
+                    '               <div class="circle">'+
+                    '                 {{person.person_num}}'+
+                    '           </div>' ,
                     latlng:
                     new kakao.maps.LatLng({{person.latitude}}, {{person.longitude}}),
 
-                    imageSrc :
-                    '<div class="circle">{{person.person_num}}</div>'
                     },
                 {% endfor %}
                 {% endfor %}
         ];
 
+        //여기
         for (var i = 0; i < position.length; i ++) {
+           
         // 마커 위에 커스텀오버레이를 표시합니다
         // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
             var overlay = new kakao.maps.CustomOverlay({
@@ -204,15 +215,19 @@
                 map: map,
                 position: position[i].latlng
             });
+            
             overlay.setMap(map);
+        // }
+//
+        // 감염자 id값
+        // for (var i = 0; i < position.length; i ++) {
+            // var circleoverlay = new kakao.maps.CustomOverlay({
+            //     content: position[i].imageSrc
+            //     map: map,
+            //     position: position[i].latl
+            // });
 
-            var circleoverlay = new kakao.maps.CustomOverlay({
-                content: position[i].imageSrc,
-                map: map,
-                position: position[i].latlng
-            });
-
-            circleoverlay.setMap(map);
+            // circleoverlay.setMap(map);
         }
 
         {% for key,results in results_transportation_map.items %}
@@ -237,9 +252,10 @@
             });
             polyline.setMap(map);
         }
+        
         {% endfor %}
         {% endfor %}
-
+   
     </script>
 
 </body>

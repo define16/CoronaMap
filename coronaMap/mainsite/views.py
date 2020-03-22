@@ -30,10 +30,10 @@ def index(request):
     # 날짜-이동수단별 분리
     results_transportation_dic = processing.separate_by_transport(results_dic)
 
-    # processing.print_separate_by_date(results_dic)
-    # processing.print_separate_by_transport(results_transportation_dic)
+    processing.print_separate_by_date(results_dic)
+    processing.print_separate_by_transport(results_transportation_dic)
 
-
+    
     return render(request, 'index.html', {'api_key' : kakao_api, 'total_person_cnt' : len(results_dic) ,  'results_map'
     : results_dic, 'results_transportation_map' : results_transportation_dic})
 

@@ -7,12 +7,18 @@
 .category .ico_coffee {background-position:-10px 0;}
 .category .ico_store {background-position:-10px -36px;}
 .category .ico_carpark {background-position:-10px -72px;}
-.label {margin-bottom: 96px;}
+
+
+.label {position:absolute;bottom:-80px;right:-50px;}
 .label * {display: inlne-block;}
-.label .left {background: url("http://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_l.png") no-repeat;display: inline-block;height: 24;overflow: hidden;vertical-align: top;width: 7px;}
-.label .center {background: url(http://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_bg.png) repeat-x;display: inline-block;height: 24;font-size: 12px;line-height: 24px;}
-.label .right {background: url("http://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_r.png") -1px 0  no-repeat;display: inline-block;height: 24px;overflow: hidden;width: 6px;}
-.circle {width:40px;height:40px;border-radius:50%;background:#393939;font-size:20px;text-align:center;line-height:43px; color:#FFFFFF; font-weight: bold;font-family:'Malgun Gothic','맑은 고딕',sans-serif;transform:scale(.6);}
+.label .left {background: url("http://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_l.png") no-repeat;height: 24;overflow: hidden;vertical-align: top;width: 7px;}
+.label .center {background: url(http://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_bg.png) repeat-x;height: 24;font-size: 12px;line-height: 24px;}
+.label .right {background: url("http://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_r.png") -1px 0  no-repeat;height: 24px;overflow: hidden;width: 6px;}
+
+
+/* .circle {width:40px;height:40px;border-radius:50%;background:#393939;font-size:20px;text-align:center;line-height:43px; color:#FFFFFF; font-weight: bold;font-family:'Malgun Gothic','맑은 고딕',sans-serif;transform:scale(.6);} */
+.circle {position:absolute;bottom: -10px;left:-15px;width:35px;height:35px;border-radius:50%;background:#393939;font-size:20px;text-align:center;line-height:40px; color:#FFFFFF; font-weight: bold;font-family:'Malgun Gothic','맑은 고딕',sans-serif;transform:scale(.6);}
+
     /*
      박스
     */
@@ -45,6 +51,6 @@
     /*
      삼각형
     */
-    .info:after {content: '';position: absolute;margin: 0px 0 -20px 0px;left: 50%;bottom: 7px;width: 22px;height: 15px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png');transform:scale(.8);}
-    .info .link {color: #5085BB;}
+    /* .info:after {content: '';position: absolute;margin: 0px 0 -20px 0px;left: 50%;bottom: 7px;width: 22px;height: 15px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png');transform:scale(.8);} */
+    /* .info .link {color: #5085BB;} */
 
