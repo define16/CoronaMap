@@ -147,3 +147,22 @@ class DataProcessing():
                         print("longitude :", spot.get('longitude'))
                         print("color :", spot.get('color'))
                         print()
+                        
+    def separate_by_transport_tmp(self, results_dic:dict):
+        """
+        날짜-이동수단별 분리
+        results_dic : separate_by_date를 마친 dictionary
+        """
+        results_transportation_dic = {}
+        for key, results in results_dic.items():  # 사람별로 구분
+            person_dic = []
+
+            for result in results.values():  # 날짜 + 이동수단로 구분
+                # 하루에 하나의 장소만 간 경우 또는 하나의 이동수단만 이용한 경우
+                spot_dic = {"latitude": result.get("latitude"), "longitude": result.get("longitude"),
+                            "color": self.convert_color(result.get("transportation"))}
+                person_dic.append(spot_dic)
+
+            results_transportation_dic[key] = person_dic
+
+        return  results_transportation_dic
