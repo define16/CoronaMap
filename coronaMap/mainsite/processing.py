@@ -150,8 +150,7 @@ class DataProcessing():
                         
     def separate_by_transport_tmp(self, results_dic:dict):
         """
-        날짜-이동수단별 분리
-        results_dic : separate_by_date를 마친 dictionary
+        분리 X
         """
         results_transportation_dic = {}
         for key, results in results_dic.items():  # 사람별로 구분
@@ -164,5 +163,52 @@ class DataProcessing():
                 person_dic.append(spot_dic)
 
             results_transportation_dic[key] = person_dic
+
+        return  results_transportation_dic
+
+    def separate_by_transport_tmp2(self, results_dic:dict):
+        """
+        날짜-이동수단별 분리
+        results_dic : separate_by_date를 마친 dictionary
+        """
+        results_transportation_dic = {}
+        for key, results in results_dic.items():  # 사람별로 구분
+            date_tmp = 0;
+            transport_tmp = ""
+            latitude_before = ""
+            longitude_before = ""
+            path_dic = []
+            transport_dic = []
+            transport_idx = 0
+            path_idx = 0
+
+            for result in results.values():  # 날짜 + 이동수단로 구분
+                # 날짜별로 구분
+                if transport_tmp == "" or result.get("transportation") == transport_tmp:  # 같은 이동수단으로 다음 장소로 이동한 경우
+                    latitude_before = result.get("latitude")
+                    longitude_before = result.get("longitude")
+                    spot_dic = {"latitude": result.get("latitude"), "longitude": result.get("longitude"),
+                                "color": self.convert_color(result.get("transportation"))}
+                    path_dic.append(spot_dic)
+                    path_idx += 1
+                else:  # 이동수단을 변경한 경우
+                    spot_dic = {"latitude": latitude_before, "longitude": longitude_before,
+                                "color": self.convert_color(transport_tmp)}
+                    path_dic.append(spot_dic)
+                    path_idx += 1
+                    transport_dic.append(path_dic) # 현 이동수단으로 움직인 경로를 저장
+                    transport_idx += 1
+                    path_dic = []  # 경로 초기화
+                    path_idx = 0
+                    spot_dic = {"latitude": result.get("latitude"), "longitude": result.get("longitude"),
+                                "color": self.convert_color(result.get("transportation"))}
+                    path_dic.append(spot_dic)
+                    path_idx += 1
+
+
+                transport_tmp = result.get("transportation")  # 이전(index-1) 이동수단
+
+            transport_dic.append(path_dic)
+            results_transportation_dic[key] = transport_dic
 
         return  results_transportation_dic

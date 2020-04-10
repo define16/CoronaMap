@@ -175,9 +175,16 @@
              $.each(results_map, function(key, person){
                  setOverLay(person);
              });
+
+            console.log("data : ", results_transportation_map) // TODO
+
             //polyline 표시
-            $.each(results_transportation_map , function(key, data) {
-                setPolyline(key, data);
+            $.each(results_transportation_map , function(key, person_data) {
+                console.log("key :", key, person_data)
+                $.each(person_data , function(idx ,data) {
+                    console.log("key1 :", key, data)
+                    setPolyline(key, data);
+                });
             });
              
             //overlay 그리기
@@ -190,7 +197,7 @@
         function initMap () {
             var map = document.getElementById('map');
             var mapOtion = {
-                center: new kakao.maps.LatLng(37.885397	,127.729773), // 항상 고정?
+                center: new kakao.maps.LatLng(37.885397	,127.729773),
                 level: 11 // 지도 확대 레벨
             }
             new_map = new kakao.maps.Map(map, mapOtion);
@@ -230,27 +237,29 @@
                 }));
             });
         }
+
         // - poly Line 생성
         var setPolyline = function(index, data) {
             var latlng = [];
             var color = [];
-            
-            $.each(data, function(key, values) { // 리스트 안에 리스트 여서 for문 한번더 돌아야함
+
+           $.each(data, function(key, values) { // 리스트 안에 리스트 여서 for문 한번더 돌아야함
                 latlng.push(new kakao.maps.LatLng(values.latitude, values.longitude)); // 경로 그려주기
                 color.push(values.color); // 색상 값
             });
-            
-            var poly = new kakao.maps.Polyline({ // 사람 별로 경로 만들어줌 
+
+
+            var poly = new kakao.maps.Polyline({ // 사람 별로 경로 만들어줌
                 path: latlng, // 경로가 배열로 들어감
                 strokeWeight: 5,
                 strokeOpacity: 0.9,
-                strokeColor: color[3],//색상 바꿔주는거 찾아 봐야 할듯?
+                strokeColor: color[0],//색상 바꿔주는거 찾아 봐야 할듯?
                 strokeStyle: 'solid'
-            });                 
-            
+            });
+
             poly.setMap(new_map);
         }
-        
+
     </script>
 
 </body>
