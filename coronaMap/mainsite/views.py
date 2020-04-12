@@ -16,9 +16,9 @@ kakao_api = json_data['kakao_test'] # 테스트용
 # Create your views here.
 def index(request):
     """
-    TODO : 확진자 명수, 카테고리별로 확진자 그룹핑 로직 추가
-    날짜별,교통수단별 이동경로에 색깔 적용하기 (새로운 map인 results_transportation을 추가로 만들어서 넘기기.)
-    각 날짜의 마지막 교통수단의 경로가 누락됨
+    TODO : 하단의 문제점 해결하기, 지역별로 나누기
+    1. 이동수단 색상이 맞지 않음.
+    2. 다른 사람의 이동경로와 이어짐.
     """
     processing = DataProcessing()
 
@@ -31,23 +31,26 @@ def index(request):
     results_transportation_dic = processing.separate_by_transport(results_dic)
     results_transportation_tmp_dic = processing.separate_by_transport_tmp(results_dic)
     results_transportation_tmp2_dic = processing.separate_by_transport_tmp2(results_dic)
+    results_region_dic = processing.separate_by_region(results_dic)
+
     print(results_transportation_tmp_dic)
     print(results_transportation_tmp2_dic)
     results_json = json.dumps(results_dic).encode(''
                                                   'utf-8').decode()
     results_transportation_json = json.dumps(results_transportation_dic).encode('utf-8').decode()
-    
     results_transportation_tmp_json = json.dumps(results_transportation_tmp_dic).encode('utf-8').decode() # 추가
     results_transportation_tmp2_json = json.dumps(results_transportation_tmp2_dic).encode('utf-8').decode() # 추가
+
+    results_region_json = json.dumps(results_region_dic).encode('utf-8').decode()  # 추가
     
     # print(type(results_json))
     # print(type(results_transportation_json))
-    #
+
     # processing.print_separate_by_date(results_dic)
     # processing.print_separate_by_transport(results_transportation_dic)
 
     return render(request, 'index.html', {'api_key' : kakao_api, 'total_person_cnt' : len(results_dic) ,  'results_map'
-    : results_json, 'results_transportation_map' : results_transportation_tmp2_json})
+    : results_json, 'results_transportation_map' : results_transportation_tmp2_json, 'results_region_map' : results_region_json})
 
 def status(request):
     return render(request, 'status.html')

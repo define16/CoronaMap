@@ -1,4 +1,5 @@
-
+from .models import InfectedPeople
+from pprint import pprint
 
 class DataProcessing():
     GREEN ="#00ff00"
@@ -27,6 +28,7 @@ class DataProcessing():
 
             tmp_transportation = result.transportation
             color = self.convert_color(tmp_transportation)
+
             if int(result.visited_date) != check_date :
                 change_date = 1 # 날짜가 바뀌었을 때
             else :
@@ -40,6 +42,9 @@ class DataProcessing():
             check_date = result.visited_date
             check_person_num = result.person_num #
             total_spot_cnt += 1
+
+        results_dic["person_" + str(check_person_num)] = person_dic # 마지막 Index 저장
+
         return results_dic
 
     def separate_by_transport(self, results_dic:dict):
@@ -110,6 +115,27 @@ class DataProcessing():
 
         return  results_transportation_dic
 
+    def separate_by_region(self,results) :
+        regions_dic = {}
+        regions_rows = InfectedPeople.objects.values('region').order_by('region').distinct()  # -는 내림차순
+        for row in regions_rows :
+            regions_dic[row.get('region')] = []
+        print("aaa")
+        for key, result in results.items() :
+            region_tmp = []
+            for value in result.values():
+                if value.get('region') in region_tmp :
+                    continue
+                else :
+                    region_tmp.append(value.get('region'))
+            for region_name in region_tmp :
+                tmp_list = regions_dic.get(region_name)
+                tmp_list.append(key)
+                regions_dic[region_name] = tmp_list
+
+        pprint(regions_dic)
+
+
     def convert_color(self, transportation) :
         if transportation in self.colour_template.keys():
             return self.colour_template.get(transportation)
@@ -147,6 +173,7 @@ class DataProcessing():
                         print("longitude :", spot.get('longitude'))
                         print("color :", spot.get('color'))
                         print()
+
                         
     def separate_by_transport_tmp(self, results_dic:dict):
         """

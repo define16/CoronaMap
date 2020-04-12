@@ -90,11 +90,13 @@
                   </button>
 
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" id="all_people" onclick="changeMarker()">모든 확진자</a>
-                      <a class="dropdown-item" id="chun" onclick="changeMarker()">속초/고성</a>
-                      <a class="dropdown-item" id="dongsam" onclick="changeMarker()">동해/삼척</a>
-                      <a class="dropdown-item" id="gang" onclick="changeMarker()">강릉</a>
-                      <a class="dropdown-item" id="sokgo" onclick="changeMarker()">춘천</a>
+                      <a class="dropdown-item" id="all_people" onclick="changeMarker('all_people')">모든 확진자</a>
+                      <a class="dropdown-item" id="chuncheon" onclick="changeMarker('chuncheon')">춘천</a>
+                      <a class="dropdown-item" id="wonju" onclick="changeMarker('wonju')">원주</a>
+                      <a class="dropdown-item" id="sokcho_goseong" onclick="changeMarker('sokgo')">속초/고성</a>
+                      <a class="dropdown-item" id="eastsea_samcheok" onclick="changeMarker('eastsea_samcheok')">동해/삼척</a>
+                      <a class="dropdown-item" id="gangneung" onclick="changeMarker('gangneung')">강릉</a>
+
                   </div>
               </div>
 
@@ -165,6 +167,7 @@
         {% autoescape off %}
         var results_map = {{ results_map }}; 
         var results_transportation_map = {{results_transportation_map}};
+        var results_region_map = {{results_region_map}};
         {% endautoescape %}
         
         $(document).ready(function () {
@@ -173,10 +176,11 @@
              
              // overlay 표시
              $.each(results_map, function(key, person){
+                 console.log("data : ", person);
                  setOverLay(person);
              });
 
-            console.log("data : ", results_transportation_map) // TODO
+            // console.log("data : ", results_transportation_map); // TODO
 
             //polyline 표시
             $.each(results_transportation_map , function(key, person_data) {
@@ -209,8 +213,7 @@
         var setOverLay = function (person) {
             var position = '';
             $.each(person, function(key, one_person){                
-                position = 
-                    '<div class ="label"><span class="left"></span><span class="center">'+one_person.place+'</span><span class="right"></span></div>' +
+                contents =
                     '<div class="wrap">' +
                     '    <div class="info">' +
                     '        <div class="title">' +
@@ -222,7 +225,7 @@
                     '           </div>' +
                     '            <div class="desc">' +
                     '                <div class="ellipsis">이동수단: '+ one_person.transportation.substring(0, 8)+'</div>' + //최대 8글자
-                    '                <div class="jibun ellipsis">방문일자: '+one_person.visited_date+'</div>' +//
+                    '                <div class="jibun ellipsis">방문일자: '+one_person.visited_date+'</div>' +
                     '            </div>' +
                     '        </div>' +
                     '    </div>' +
@@ -232,7 +235,7 @@
                     '</div>';
                 
                 over_lay.push(new kakao.maps.CustomOverlay({
-                  content: position,//마커 내용
+                  content: contents,//마커 내용
                   position: new kakao.maps.LatLng(one_person.latitude, one_person.longitude) // 경로 설정
                 }));
             });
@@ -242,13 +245,13 @@
         var setPolyline = function(index, data) {
             var latlng = [];
             var color = [];
-
            $.each(data, function(key, values) { // 리스트 안에 리스트 여서 for문 한번더 돌아야함
+                console.log("data Test : ", key);
                 latlng.push(new kakao.maps.LatLng(values.latitude, values.longitude)); // 경로 그려주기
                 color.push(values.color); // 색상 값
             });
-
-
+            console.log("latlng : ", latlng);
+            console.log("color : ", color);
             var poly = new kakao.maps.Polyline({ // 사람 별로 경로 만들어줌
                 path: latlng, // 경로가 배열로 들어감
                 strokeWeight: 5,
@@ -256,9 +259,11 @@
                 strokeColor: color[0],//색상 바꿔주는거 찾아 봐야 할듯?
                 strokeStyle: 'solid'
             });
-
+            console.log("poly : ", poly);
             poly.setMap(new_map);
         }
+
+
 
     </script>
 
