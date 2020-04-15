@@ -9,6 +9,7 @@ import pymysql;
 def init():
     global db, cursor;
     path = os.path.join(os.path.abspath("../coronaMap"), 'conf', 'dbkey.json')
+    print(path)
     with open(path, 'r') as f:
         json_data = json.load(f)
     mariadb = json_data['mariadb']  # 테스트용
@@ -22,8 +23,17 @@ def insert_data(data, data_size):
         for line in data:
             progressbar += 1;
             if (line[0].isdigit()):
-                sql = "INSERT INTO infected_people (person_num, region, region_id, visited_date, place, address, latitude, longitude, transportation) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+                if line[8] in ['도보', '자차', '대중교통', '미공개']:
+                    pass
+                else :
+                    line[8] = '미공개'
+                if line[3] == '-':
+                    line[3] = 19900101
+
+                sql = "INSERT INTO infected_people (person_num, region, region_id, visited_date, place, address, latitude, longitude, transportation) " \
+                      "VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
                 cursor.execute(sql, tuple(line))
+                # print(line[8])
                 # print(sql, tuple(line))
 
                 print("Inserting (%d%%): [%d / %d] " % (progressbar/data_size * 100, progressbar, data_size))
