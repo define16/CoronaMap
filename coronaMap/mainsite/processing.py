@@ -240,7 +240,7 @@ class DataProcessing():
 
         return  results_transportation_dic
 
-    def separate_by_transport(self, results_dic: dict):
+    def separate_by_transport_tmp3(self, results_dic: dict):
         """
         날짜-이동수단별 분리
         results_dic : separate_by_date를 마친 dictionary
