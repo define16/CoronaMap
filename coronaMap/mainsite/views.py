@@ -51,7 +51,6 @@ def index(request):
 
     # processing.print_separate_by_date(results_dic)
     # processing.print_separate_by_transport(results_transportation_dic)
-    pprint(results_transportation_tmp3_json)
 
     return render(request, 'index.html', {'api_key' : kakao_api, 'total_person_cnt' : len(results_dic) ,  'results_map'
     : results_json, 'results_transportation_map' : results_transportation_tmp3_json, 'results_region_map' : results_region_json})
