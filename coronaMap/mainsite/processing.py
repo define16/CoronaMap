@@ -239,3 +239,52 @@ class DataProcessing():
             results_transportation_dic[key] = transport_dic
 
         return  results_transportation_dic
+
+    def separate_by_transport(self, results_dic: dict):
+        """
+        날짜-이동수단별 분리
+        results_dic : separate_by_date를 마친 dictionary
+        """
+        results_transportation_dic = {}
+        for key, results in results_dic.items():  # 사람별로 구분
+            date_tmp = 0;
+            transport_tmp = ""
+            latitude_before = ""
+            longitude_before = ""
+            path_dic = {}
+            transport_dic = {'lat_lon' : [], 'color': []}
+            date_dic = {}
+            transport_idx = 0
+            path_idx = 0
+
+            print(key, results)
+            for result in results.values():  # 날짜 + 이동수단로 구분
+
+                lat_lon = []
+                if not (result.get("visited_date") == date_tmp or not transport_dic) :
+                    # 날짜별로 구분
+                    transport_dic = {'lat_lon': [], 'color': []}
+
+
+                lat_lon.append(result.get("latitude"))
+                lat_lon.append(result.get("longitude"))
+
+                transport_dic['lat_lon'].append(lat_lon)
+                transport_dic['color'].append(self.convert_color(result.get("transportation")))
+
+
+                date_tmp = result.get("visited_date")
+                date_dic[str(date_tmp)] = transport_dic  # 마지막 날짜를 저장
+
+
+
+            pprint(date_dic)
+
+
+
+
+
+
+            results_transportation_dic[key] = date_dic
+
+        return results_transportation_dic
