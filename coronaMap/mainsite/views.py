@@ -3,9 +3,6 @@ import json
 import os
 from .models import InfectedPeople
 from .processing import DataProcessing
-import pprint
-
-
 
 key_path = os.path.join( os.getcwd(), 'coronaMap' , 'conf', 'apikey.json')
 with open(key_path, 'r') as f:
@@ -31,17 +28,17 @@ def index(request):
     # 날짜-이동수단별 분리
     results_transportation_dic = processing.separate_by_transport(results_dic)
     # results_transportation_tmp_dic = processing.separate_by_transport_tmp(results_dic)
-    results_transportation_tmp2_dic = processing.separate_by_transport_tmp2(results_dic)
+    # results_transportation_tmp2_dic = processing.separate_by_transport_tmp2(results_dic)
     results_transportation_tmp3_dic = processing.separate_by_transport_tmp3(results_dic)
     results_region_dic = processing.separate_by_region(results_dic)
 
     # print(results_transportation_tmp_dic)
     # print(results_transportation_tmp2_dic)
-    results_json = json.dumps(results_dic).encode(''
-                                                  'utf-8').decode()
+    results_json = json.dumps(results_dic).encode('utf-8').decode()
+
     results_transportation_json = json.dumps(results_transportation_dic).encode('utf-8').decode()
     # results_transportation_tmp_json = json.dumps(results_transportation_tmp_dic).encode('utf-8').decode() # 추가
-    results_transportation_tmp2_json = json.dumps(results_transportation_tmp2_dic).encode('utf-8').decode() # 추가
+    # results_transportation_tmp2_json = json.dumps(results_transportation_tmp2_dic).encode('utf-8').decode() # 추가
     results_transportation_tmp3_json = json.dumps(results_transportation_tmp3_dic).encode('utf-8').decode() # 추가
 
     results_region_json = json.dumps(results_region_dic).encode('utf-8').decode()  # 추가
@@ -67,21 +64,9 @@ def nearby_clinic(request):
 def prevent(request):
     return render(request, 'prevent.html')
 
-
-def mapTest2(request):
-    return render(request, 'index3.html')
-
-def sokgo(request):
-    return render(request, 'sok_go.html')
-
-def dongsam(request):
-    return render(request, 'dong_sam.html')
-
-def gang(request):
-    return render(request, 'gang.html')
-
-def chun(request):
-    return render(request, 'chun.html')
+def region_post(request) :
+    if request.method == "POST":
+        pass
 
 
 # ssl 인증용
