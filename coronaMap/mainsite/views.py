@@ -64,10 +64,6 @@ def nearby_clinic(request):
 def prevent(request):
     return render(request, 'prevent.html')
 
-def region_post(request) :
-    if request.method == "POST":
-        pass
-
 
 # ssl 인증용
 def ssl(request):
@@ -83,6 +79,15 @@ def search():
     full_filename = os.path.join(dirname, filenames[0])
     urlname = '.well-known/acme-challenge/' + filenames[0]
     return urlname, full_filename
+
+
+
+## 새로운 application 생성 후 옮기기.
+def region_post(request) :
+    if request.method == "POST":
+        pass
+
+
 
 
 
