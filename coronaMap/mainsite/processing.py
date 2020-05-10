@@ -120,7 +120,6 @@ class DataProcessing():
         regions_rows = InfectedPeople.objects.values('region').order_by('region').distinct()  # -는 내림차순
         for row in regions_rows :
             regions_dic[row.get('region')] = []
-        print("aaa")
         for key, result in results.items() :
             region_tmp = []
             for value in result.values():
@@ -134,6 +133,7 @@ class DataProcessing():
                 regions_dic[region_name] = tmp_list
 
         pprint(regions_dic)
+        return regions_dic
 
 
     def convert_color(self, transportation) :

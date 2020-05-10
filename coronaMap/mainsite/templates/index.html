@@ -90,11 +90,14 @@
                   </button>
 
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" id="all_people" onclick="changeMarker()">모든 확진자</a>
-                      <a class="dropdown-item" id="chun" onclick="changeMarker()">속초/고성</a>
-                      <a class="dropdown-item" id="dongsam" onclick="changeMarker()">동해/삼척</a>
-                      <a class="dropdown-item" id="gang" onclick="changeMarker()">강릉</a>
-                      <a class="dropdown-item" id="sokgo" onclick="changeMarker()">춘천</a>
+                      <a class="dropdown-item" id="all_people" onclick="changeMarker('all')">모든 확진자</a>
+                      <a class="dropdown-item" id="gang" onclick="changeMarker('강릉')">강릉</a>
+                      <a class="dropdown-item" id="sokgo" onclick="changeMarker('춘천')">춘천</a>
+                      <a class="dropdown-item" id="sokgo" onclick="changeMarker('원주')">원주</a>
+                      <a class="dropdown-item" id="sokgo" onclick="changeMarker('철원')">철원</a>
+                      <a class="dropdown-item" id="chun" onclick="changeMarker('속초,고성,양양')">속초/고성/양양</a>
+                      <a class="dropdown-item" id="dongsam" onclick="changeMarker('동해,삼척,인제')">동해/삼척/인제</a>
+                      <a class="dropdown-item" id="sokgo" onclick="changeMarker('태백,평창,횡성')">태백/평창/횡성</a>
                   </div>
               </div>
 
@@ -163,23 +166,44 @@
         var poly_color = [];
         // 넘겨온 데이터 받기
         {% autoescape off %}
-        var results_map = {{ results_map }}; 
+        var results_map = {{results_map}};
         var results_transportation_map = {{results_transportation_map}};
+        var results_region_map = {{results_region_map}};
         {% endautoescape %}
         
         $(document).ready(function () {
-             // 지도 맵 생성
-             initMap();
-             // overlay 표시
-             $.each(results_map, function(key, person){ 
-                 setOverLay(person);
+            // 지도 맵 생성
+            initMap();
+            // overlay 표시
+            drawing(new Array());
+        });
+
+        // 맵 생성
+        function initMap () {
+            var map = document.getElementById('map');
+            var mapOtion = {
+                center: new kakao.maps.LatLng(37.885397	,127.729773),
+                level: 11 // 지도 확대 레벨
+            }
+            new_map = new kakao.maps.Map(map, mapOtion);
+            
+        }
+        
+        function drawing(person_num) {
+             $.each(results_map, function(key, person){
+                 if (person_num.length == 0){
+                     setOverLay(person);
+                 } else {
+                     if (person_num.contains(key)) {
+                         setOverLay(person);
+                     }
+                 }
              });
 
             //polyline 표시 - 마커와 마커 사이 그려줘야 함
             $.each(results_transportation_map , function(key, date) {
                 var poly = new kakao.maps.Polyline();
                 var colors = '';
-                // 이럴거면 날짜 상관 없이 위치 정보만 가져오면 될듯
                 $.each(date , function(idx ,data) {
                     setPolyline(date[idx]);
                 });
@@ -192,28 +216,17 @@
                     });
                     poly.setPath(poly_line);
                     // poly.setOptions({strokeColor:data});
-                    poly.setMap(new_map);  
+                    poly.setMap(new_map);
                     // colors = data;
                 // });
                 poly_line = [];
                 poly_color = [];
             });
-             
+
             //overlay 그리기
              $.each(over_lay, function(key, value) {
-                over_lay[key].setMap(new_map); 
-             });             
-         });
-        
-        // 맵 생성
-        function initMap () {
-            var map = document.getElementById('map');
-            var mapOtion = {
-                center: new kakao.maps.LatLng(37.885397	,127.729773),
-                level: 11 // 지도 확대 레벨
-            }
-            new_map = new kakao.maps.Map(map, mapOtion);
-            
+                over_lay[key].setMap(new_map);
+             });
         }
         
         // 객체 생성
@@ -258,6 +271,32 @@
                 poly_line.push(new kakao.maps.LatLng(value[0],value[1]));
             });
             poly_color.push(poly_data.color);
+        }
+
+        // 지역을 변경할때 사용하는 함수
+        function changeMarker(check_regions) {
+            // type을 받아서 누른 id를 비교
+            var people_info = new Array();
+            var check_region_list = check_regions.split(',');
+            if (check_region_list[0] != 'all') {
+                check_region_list.forEach(function (check_region) {
+                    $.each(results_region_map, function (region, person_num_list) {
+                        // 지역으로 person의 정를 get
+                        if (region == check_region) {
+                            people_info = people_info.concat(person_num_list)
+                        }
+                    });
+                })
+                people_info = Array.from(new Set(people_info));
+                console.log(people_info);
+            }
+
+            drawing(people_info);
+
+            // person을 묶어서 새로운 results_map 과 results_transfort_map을 생성
+
+            // drawing(results_map, results_transfort_map)를 실행
+
         }
 
     </script>

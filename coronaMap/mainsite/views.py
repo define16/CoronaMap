@@ -81,7 +81,6 @@ def search():
     return urlname, full_filename
 
 
-
 ## 새로운 application 생성 후 옮기기.
 def region_post(request) :
     if request.method == "POST":
