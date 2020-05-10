@@ -93,11 +93,11 @@
                       <a class="dropdown-item" id="all_people" onclick="changeMarker('all')">모든 확진자</a>
                       <a class="dropdown-item" id="gang" onclick="changeMarker('강릉')">강릉</a>
                       <a class="dropdown-item" id="sokgo" onclick="changeMarker('춘천')">춘천</a>
-                      <a class="dropdown-item" id="sokgo" onclick="changeMarker('원주')">원주</a>
-                      <a class="dropdown-item" id="sokgo" onclick="changeMarker('철원')">철원</a>
+                      <a class="dropdown-item" id="wonju" onclick="changeMarker('원주')">원주</a>
+                      <a class="dropdown-item" id="Cheorwon" onclick="changeMarker('철원')">철원</a>
                       <a class="dropdown-item" id="chun" onclick="changeMarker('속초,고성,양양')">속초/고성/양양</a>
                       <a class="dropdown-item" id="dongsam" onclick="changeMarker('동해,삼척,인제')">동해/삼척/인제</a>
-                      <a class="dropdown-item" id="sokgo" onclick="changeMarker('태백,평창,횡성')">태백/평창/횡성</a>
+                      <a class="dropdown-item" id="pyeongchang" onclick="changeMarker('태백,평창,횡성')">태백/평창/횡성</a>
                   </div>
               </div>
 
@@ -175,7 +175,8 @@
             // 지도 맵 생성
             initMap();
             // overlay 표시
-            drawing(new Array());
+            changeMarker('all');
+
         });
 
         // 맵 생성
@@ -186,47 +187,53 @@
                 level: 11 // 지도 확대 레벨
             }
             new_map = new kakao.maps.Map(map, mapOtion);
-            
         }
-        
+        // TODO ready때문인지 js로 인해 화면이 변화가 없음
         function drawing(person_num) {
+            over_lay = [];
              $.each(results_map, function(key, person){
                  if (person_num.length == 0){
                      setOverLay(person);
                  } else {
-                     if (person_num.contains(key)) {
+                     if (person_num.includes(key)) {
+                         console.log("drawing " + key);
+                         console.log(person)
+                         // console.log("drawing person_num"+key);
+                         // console.log(person);
                          setOverLay(person);
                      }
                  }
              });
 
-            //polyline 표시 - 마커와 마커 사이 그려줘야 함
-            $.each(results_transportation_map , function(key, date) {
-                var poly = new kakao.maps.Polyline();
-                var colors = '';
-                $.each(date , function(idx ,data) {
-                    setPolyline(date[idx]);
-                });
-                // $.each(poly_color, function(idx, data) {
-                    poly.setOptions({
-                        strokeWeight: 5,
-                        strokeColor: poly_color[0],
-                        strokeOpacity: 0.8,
-                        strokeStyle: 'solid'
-                    });
-                    poly.setPath(poly_line);
-                    // poly.setOptions({strokeColor:data});
-                    poly.setMap(new_map);
-                    // colors = data;
-                // });
-                poly_line = [];
-                poly_color = [];
-            });
+            // //polyline 표시 - 마커와 마커 사이 그려줘야 함
+            // $.each(results_transportation_map , function(key, date) {
+            //     var poly = new kakao.maps.Polyline();
+            //     var colors = '';
+            //
+            //     $.each(date , function(idx ,data) {
+            //         setPolyline(date[idx]);
+            //     });
+            //     // $.each(poly_color, function(idx, data) {
+            //         poly.setOptions({
+            //             strokeWeight: 5,
+            //             strokeColor: poly_color[0],
+            //             strokeOpacity: 0.8,
+            //             strokeStyle: 'solid'
+            //         });
+            //         poly.setPath(poly_line);
+            //         // poly.setOptions({strokeColor:data});
+            //         poly.setMap(new_map);
+            //         // colors = data;
+            //     // });
+            //     poly_line = [];
+            //     poly_color = [];
+            // });
 
+            console.log(over_lay)
             //overlay 그리기
-             $.each(over_lay, function(key, value) {
-                over_lay[key].setMap(new_map);
-             });
+            $.each(over_lay, function(key, value) {
+               over_lay[key].setMap(new_map);
+            });
         }
         
         // 객체 생성
@@ -234,8 +241,7 @@
         var setOverLay = function (person) {
             var position = '';
             $.each(person, function(key, one_person){                
-                position = 
-                    '<div class ="label"><span class="left"></span><span class="center">'+one_person.place+'</span><span class="right"></span></div>' +
+                position =
                     '<div class="wrap">' +
                     '    <div class="info">' +
                     '        <div class="title">' +
@@ -274,29 +280,26 @@
         }
 
         // 지역을 변경할때 사용하는 함수
-        function changeMarker(check_regions) {
+        var changeMarker = function(check_regions) {
             // type을 받아서 누른 id를 비교
-            var people_info = new Array();
+            var people_info = [];
             var check_region_list = check_regions.split(',');
             if (check_region_list[0] != 'all') {
                 check_region_list.forEach(function (check_region) {
                     $.each(results_region_map, function (region, person_num_list) {
                         // 지역으로 person의 정를 get
                         if (region == check_region) {
+                            console.log("changeMarker " + check_region)
+                            console.log("changeMarker " + person_num_list)
+                            console.log("changeMarker " + region)
                             people_info = people_info.concat(person_num_list)
                         }
                     });
                 })
                 people_info = Array.from(new Set(people_info));
-                console.log(people_info);
             }
-
+            console.log(people_info)
             drawing(people_info);
-
-            // person을 묶어서 새로운 results_map 과 results_transfort_map을 생성
-
-            // drawing(results_map, results_transfort_map)를 실행
-
         }
 
     </script>
