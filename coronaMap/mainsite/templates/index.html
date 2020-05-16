@@ -162,7 +162,7 @@
         var map = document.getElementById('map');
         var new_map = '';
         var over_lay = [];
-        var poly_line = Array();
+        var poly_line = [];
         var poly_color = [];
         // 넘겨온 데이터 받기
         {% autoescape off %}
@@ -173,14 +173,14 @@
         
         $(document).ready(function () {
             // 지도 맵 생성
-            initMap();
+            createMap();
             // overlay 표시
             changeMarker('all');
 
         });
 
         // 맵 생성
-        function initMap () {
+        function createMap () {
             var map = document.getElementById('map');
             var mapOtion = {
                 center: new kakao.maps.LatLng(37.885397	,127.729773),
@@ -188,56 +188,47 @@
             }
             new_map = new kakao.maps.Map(map, mapOtion);
         }
-        // TODO ready때문인지 js로 인해 화면이 변화가 없음
+
         function drawing(person_num) {
-            over_lay = [];
-             $.each(results_map, function(key, person){
+             initMap()
+             // $.each(results_map, function(key, person){
+             //     if (person_num.length == 0){
+             //         setOverLay(person);
+             //     } else {
+             //         if (person_num.includes(key)) {
+             //             setOverLay(person);
+             //         }
+             //     }
+             // });
+
+            //polyline 표시 - 마커와 마커 사이 그려줘야 함
+            $.each(results_transportation_map , function(key, date) {
                  if (person_num.length == 0){
-                     setOverLay(person);
+                     drawployline(key, date);
                  } else {
                      if (person_num.includes(key)) {
-                         console.log("drawing " + key);
-                         console.log(person)
-                         // console.log("drawing person_num"+key);
-                         // console.log(person);
-                         setOverLay(person);
+                         drawployline(key, date);
                      }
                  }
-             });
 
-            // //polyline 표시 - 마커와 마커 사이 그려줘야 함
-            // $.each(results_transportation_map , function(key, date) {
-            //     var poly = new kakao.maps.Polyline();
-            //     var colors = '';
-            //
-            //     $.each(date , function(idx ,data) {
-            //         setPolyline(date[idx]);
-            //     });
-            //     // $.each(poly_color, function(idx, data) {
-            //         poly.setOptions({
-            //             strokeWeight: 5,
-            //             strokeColor: poly_color[0],
-            //             strokeOpacity: 0.8,
-            //             strokeStyle: 'solid'
-            //         });
-            //         poly.setPath(poly_line);
-            //         // poly.setOptions({strokeColor:data});
-            //         poly.setMap(new_map);
-            //         // colors = data;
-            //     // });
-            //     poly_line = [];
-            //     poly_color = [];
-            // });
+            });
 
-            console.log(over_lay)
             //overlay 그리기
+            setMap(new_map)
+        }
+
+        var setMap = function (map) {
             $.each(over_lay, function(key, value) {
-               over_lay[key].setMap(new_map);
+               over_lay[key].setMap(map);
             });
         }
-        
-        // 객체 생성
-        // - 커스텀 오버레이 표시
+
+        var initMap = function () {
+            setMap(null);
+            over_lay = [];
+        }
+
+        // 커스텀 오버레이 표시
         var setOverLay = function (person) {
             var position = '';
             $.each(person, function(key, one_person){                
@@ -279,6 +270,33 @@
             poly_color.push(poly_data.color);
         }
 
+        var drawployline = function (person, date) {
+                console.log(person);
+                var poly = new kakao.maps.Polyline();
+                var colors = '';
+
+                $.each(date , function(idx ,data) {
+                    $.each()
+                    setPolyline(data);
+                    poly.setOptions({
+                        strokeWeight: 5,
+                        strokeColor: poly_color[0],
+                        strokeOpacity: 0.8,
+                        strokeStyle: 'solid'
+                    });
+                    console.log(poly_line)
+                    console.log(poly_color)
+
+                    poly.setPath(poly_line);
+                    // poly.setOptions({strokeColor:data});
+                    poly.setMap(new_map);
+
+                    poly_line = [];
+                    poly_color = [];
+                });
+
+        }
+
         // 지역을 변경할때 사용하는 함수
         var changeMarker = function(check_regions) {
             // type을 받아서 누른 id를 비교
@@ -298,7 +316,6 @@
                 })
                 people_info = Array.from(new Set(people_info));
             }
-            console.log(people_info)
             drawing(people_info);
         }
 
