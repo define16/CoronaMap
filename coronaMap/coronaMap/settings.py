@@ -188,14 +188,13 @@ LOGGING = {
     # 로그 레코드 저장소
     # 로거를 이름별로 정의
     'loggers': {
-        'polls': {
+        '' : {
             'handlers': ['file'],
-            'level': 'DEBUG',
+            'level': 'INFO',
         },
-        'books': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-        }
+        'django': {'handlers': ['file'], 'propagate': True, 'level': 'INFO', },
+        'django.request': {'handlers': ['file'], 'propagate': False, 'level': 'INFO', },
+        'mainsite': {'handlers': ['file'], 'level': 'DEBUG', },
     },
 
 }
