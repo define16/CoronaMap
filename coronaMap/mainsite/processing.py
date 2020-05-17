@@ -113,9 +113,6 @@ class DataProcessing():
             date_dic[str(date_tmp)] = transport_dic  # 마지막 날짜를 저장
             results_transportation_dic[key] = date_dic
 
-            print("results_transportation_dic")
-            pprint(results_transportation_dic)
-
         return  results_transportation_dic
 
     def separate_by_region(self,results) :
@@ -239,8 +236,6 @@ class DataProcessing():
 
             transport_dic.append(path_dic)
             results_transportation_dic[key] = transport_dic
-            print("separate_by_transport_tmp2")
-            pprint(results_transportation_dic)
         return  results_transportation_dic
 
     def separate_by_transport_tmp3(self, results_dic: dict):
@@ -270,6 +265,5 @@ class DataProcessing():
                 date_dic[str(date_tmp)] = transport_dic
 
             results_transportation_dic[key] = date_dic
-        print("results_transportation_dic")
-        pprint(results_transportation_dic)
+
         return results_transportation_dic
