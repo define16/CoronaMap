@@ -135,7 +135,6 @@ class DataProcessing():
                 tmp_list.append(key)
                 regions_dic[region_name] = tmp_list
 
-        pprint(regions_dic)
         return regions_dic
 
 

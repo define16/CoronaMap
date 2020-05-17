@@ -161,9 +161,11 @@
     <script type="text/javascript">
         var map = document.getElementById('map');
         var new_map = '';
+        var poly = '';
+        var poly_list = []
         var over_lay = [];
         var poly_line = [];
-        var poly_color = [];
+        var poly_color = '';
         // 넘겨온 데이터 받기
         {% autoescape off %}
         var results_map = {{results_map}};
@@ -174,9 +176,7 @@
         $(document).ready(function () {
             // 지도 맵 생성
             createMap();
-            // overlay 표시
             changeMarker('all');
-
         });
 
         // 맵 생성
@@ -191,15 +191,15 @@
 
         function drawing(person_num) {
              initMap()
-             // $.each(results_map, function(key, person){
-             //     if (person_num.length == 0){
-             //         setOverLay(person);
-             //     } else {
-             //         if (person_num.includes(key)) {
-             //             setOverLay(person);
-             //         }
-             //     }
-             // });
+             $.each(results_map, function(key, person){
+                 if (person_num.length == 0){
+                     setOverLay(person);
+                 } else {
+                     if (person_num.includes(key)) {
+                         setOverLay(person);
+                     }
+                 }
+             });
 
             //polyline 표시 - 마커와 마커 사이 그려줘야 함
             $.each(results_transportation_map , function(key, date) {
@@ -217,15 +217,19 @@
             setMap(new_map)
         }
 
+        var initMap = function () {
+            setMap(null);
+            over_lay = [];
+            $.each(poly_list, function (idx, poly) {
+                poly.setPath(null);
+                poly.setMap(null);
+            })
+        }
+
         var setMap = function (map) {
             $.each(over_lay, function(key, value) {
                over_lay[key].setMap(map);
             });
-        }
-
-        var initMap = function () {
-            setMap(null);
-            over_lay = [];
         }
 
         // 커스텀 오버레이 표시
@@ -260,39 +264,30 @@
             });
         }
 
-        // - poly Line 생성
-        var setPolyline = function(poly_data) { //date별 lat, long, color 데이터
-            var path = Array();
-            // 가져온 데이터 new LatLng 생성 해줘야댐
-            $.each(poly_data.lat_lon, function(idx, value) {
-                poly_line.push(new kakao.maps.LatLng(value[0],value[1]));
-            });
-            poly_color.push(poly_data.color);
-        }
-
+        // 선 그리는 곳
         var drawployline = function (person, date) {
-                console.log(person);
-                var poly = new kakao.maps.Polyline();
-                var colors = '';
+                $.each(date , function(idx ,path_list) {
+                    poly = new kakao.maps.Polyline();
+                    $.each(path_list, function (i, path) {
+                        // 가져온 데이터 new LatLng 생성
+                        poly_line.push(new kakao.maps.LatLng(path.latitude, path.longitude));
+                        // poly_color.push(path.color);
+                        poly_color = path.color;
+                    });
 
-                $.each(date , function(idx ,data) {
-                    $.each()
-                    setPolyline(data);
+                    // setPolyline(poly_line);
                     poly.setOptions({
                         strokeWeight: 5,
-                        strokeColor: poly_color[0],
+                        strokeColor: poly_color,
                         strokeOpacity: 0.8,
                         strokeStyle: 'solid'
                     });
-                    console.log(poly_line)
-                    console.log(poly_color)
 
                     poly.setPath(poly_line);
-                    // poly.setOptions({strokeColor:data});
                     poly.setMap(new_map);
-
+                    poly_list.push(poly)
                     poly_line = [];
-                    poly_color = [];
+                    poly_color = '';
                 });
 
         }
@@ -307,9 +302,6 @@
                     $.each(results_region_map, function (region, person_num_list) {
                         // 지역으로 person의 정를 get
                         if (region == check_region) {
-                            console.log("changeMarker " + check_region)
-                            console.log("changeMarker " + person_num_list)
-                            console.log("changeMarker " + region)
                             people_info = people_info.concat(person_num_list)
                         }
                     });
@@ -318,7 +310,6 @@
             }
             drawing(people_info);
         }
-
     </script>
 
 </body>
