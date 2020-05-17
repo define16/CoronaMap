@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+python ./coronaMap/utility/upload_csv.py $1

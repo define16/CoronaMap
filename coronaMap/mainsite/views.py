@@ -10,32 +10,25 @@ with open(key_path, 'r') as f:
 
 # kakao_api = json_data['kakao'] # 본 서버용
 kakao_api = json_data['kakao_test'] # 테스트용
+processing = DataProcessing()
 
 # Create your views here.
 def index(request):
-    """
-    TODO : 하단의 문제점 해결하기, 지역별로 나누기
-    1. 이동수단 색상이 맞지 않음.
-    2. 다른 사람의 이동경로와 이어짐.
-    """
-    processing = DataProcessing()
-
-    results = InfectedPeople.objects.all().order_by('id') # -는 내림차순
+    results = InfectedPeople.objects.all().order_by('person_num', 'visited_date') # -는 내림차순
 
     # 커스텀 오버레이, 날짜별 방문 장소를 분리
     results_dic = processing.separate_by_date(results)
 
     # 날짜-이동수단별 분리
-
-    results_transportation_tmp2_dic = processing.separate_by_transport_tmp2(results_dic)
+    results_transportation_dic = processing.separate_by_transport(results_dic)
     results_region_dic = processing.separate_by_region(results_dic)
 
     results_json = json.dumps(results_dic).encode('utf-8').decode()
-    results_transportation_tmp2_json = json.dumps(results_transportation_tmp2_dic).encode('utf-8').decode() # 추가
+    results_transportation_json = json.dumps(results_transportation_dic).encode('utf-8').decode() # 추가
     results_region_json = json.dumps(results_region_dic).encode('utf-8').decode()  # 추가
 
     return render(request, 'index.html', {'api_key' : kakao_api, 'total_person_cnt' : len(results_dic) ,  'results_map'
-    : results_json, 'results_transportation_map' : results_transportation_tmp2_json, 'results_region_map' : results_region_json})
+    : results_json, 'results_transportation_map' : results_transportation_json, 'results_region_map' : results_region_json})
 
 def status(request):
     return render(request, 'status.html')
@@ -64,14 +57,3 @@ def search():
     full_filename = os.path.join(dirname, filenames[0])
     urlname = '.well-known/acme-challenge/' + filenames[0]
     return urlname, full_filename
-
-
-## 새로운 application 생성 후 옮기기.
-def region_post(request) :
-    if request.method == "POST":
-        pass
-
-
-
-
-

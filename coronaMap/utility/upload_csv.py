@@ -33,8 +33,6 @@ def insert_data(data, data_size):
                 sql = "INSERT INTO infected_people (person_num, region, region_id, visited_date, place, address, latitude, longitude, transportation) " \
                       "VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
                 cursor.execute(sql, tuple(line))
-                # print(line[8])
-                # print(sql, tuple(line))
 
                 print("Inserting (%d%%): [%d / %d] " % (progressbar/data_size * 100, progressbar, data_size))
         db.commit()
