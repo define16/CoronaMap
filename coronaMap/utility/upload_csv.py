@@ -4,9 +4,12 @@ import os
 import sys
 import pymysql;
 
+# D:\Programing Folder\Python\Corona\coronaMap\coronaMap\conf\dbkey.json
+# D:\Programing Folder\Python\Corona\coronaMap\utility\data\real.csv
 def init():
     global db, cursor;
-    path = os.path.join(os.path.abspath("../"), 'conf','dbkey.json')
+    path = os.path.join(os.path.abspath("../coronaMap"), 'conf', 'dbkey.json')
+    print(path)
     with open(path, 'r') as f:
         json_data = json.load(f)
     mariadb = json_data['mariadb']  # 테스트용
@@ -18,10 +21,19 @@ def insert_data(data, data_size):
     try:
         progressbar: int = 0
         for line in data:
+            progressbar += 1;
             if (line[0].isdigit()):
-                sql = "INSERT INTO infected_people (person_num, place, address, latitude, longitude) VALUES(%s, %s, %s, %s, %s)"
+                if line[8] in ['도보', '자차', '대중교통', '미공개']:
+                    pass
+                else :
+                    line[8] = '미공개'
+                if line[3] == '-':
+                    line[3] = 19900101
+
+                sql = "INSERT INTO infected_people (person_num, region, region_id, visited_date, place, address, latitude, longitude, transportation) " \
+                      "VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
                 cursor.execute(sql, tuple(line))
-                progressbar += 1;
+
                 print("Inserting (%d%%): [%d / %d] " % (progressbar/data_size * 100, progressbar, data_size))
         db.commit()
 
@@ -29,7 +41,7 @@ def insert_data(data, data_size):
         db.close();
 
 # 파일명을 인자 값에서 가지고 온다.
-path = os.path.join(os.path.abspath("../../../"), 'data', str(sys.argv[1]))
+path = os.path.join(os.path.abspath("./"), 'data', str(sys.argv[1]))
 print(path)
 init()
 f = open(path, 'r', encoding='utf-8')

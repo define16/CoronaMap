@@ -17,6 +17,8 @@
 .label .center {background: url(http://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_bg.png) repeat-x;display: inline-block;height: 24px;font-size: 12px;line-height: 24px;}
 .label .right {background: url("http://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_r.png") -1px 0  no-repeat;display: inline-block;height: 24px;overflow: hidden;width: 6px;}
 </style>
+    
+    <link rel="preload" href="{% static 'css/kakaoMap.css' %}" as="style" crossorigin="crossorigin"> 
   
 	<!-- Bootstrap core CSS -->
   <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -30,6 +32,9 @@
   <link href="{% static 'css/clean-blog.min.css' %}" rel="stylesheet">
   <!-- Kakao Map -->
   <link href="{% static 'css/kakaoMap.css' %}" rel="stylesheet" type="text/css">
+    <script type="javascript">
+
+    </script>
 </head>
 
 <body>
@@ -64,22 +69,6 @@
     </div>
   </nav>
 
-  <!-- Page Header -->
-  <!--
-  <header class="masthead" style="background-image: url({% static 'img/home-bg.jpg' %})">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="site-heading">
-            <h1>Clean Blog</h1>
-            <span class="subheading">A Blog Theme by Start Bootstrap</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-  -->
     <header class="masthead">
     <div class="overlay"></div>
     <div class="container">
@@ -97,51 +86,38 @@
               </div>
               <div class="dropdown">
                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      확진자 : 6명
+                      확진자 : {{total_person_cnt}}명
                   </button>
 
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="{% url 'index' %}">모든 확진자</a>
-                      <a class="dropdown-item" href="{% url 'sokgo' %}">속초/고성</a>
-                      <a class="dropdown-item" href="{% url 'dongsam' %}">동해/삼척</a>
-                      <a class="dropdown-item" href="{% url 'gang' %}">강릉</a>
-                      <a class="dropdown-item" href="{% url 'chun' %}">춘천</a>
+                      <a class="dropdown-item" id="all_people" onclick="changeMarker('all')">모든 확진자</a>
+                      <a class="dropdown-item" id="gang" onclick="changeMarker('강릉')">강릉</a>
+                      <a class="dropdown-item" id="sokgo" onclick="changeMarker('춘천')">춘천</a>
+                      <a class="dropdown-item" id="wonju" onclick="changeMarker('원주')">원주</a>
+                      <a class="dropdown-item" id="Cheorwon" onclick="changeMarker('철원')">철원</a>
+                      <a class="dropdown-item" id="chun" onclick="changeMarker('속초,고성,양양')">속초/고성/양양</a>
+                      <a class="dropdown-item" id="dongsam" onclick="changeMarker('동해,삼척,인제')">동해/삼척/인제</a>
+                      <a class="dropdown-item" id="pyeongchang" onclick="changeMarker('태백,평창,횡성')">태백/평창/횡성</a>
                   </div>
               </div>
 
           <a>
               <!-- Kakao Map -->
+               <div style="position:absolute; right:20px;">
+                    <div style="float:right;position: relative;z-index: 3; top: 5px; "><img src={% static 'img/aa.png' %} style="max-width:100%;height:100px;"></img>
+                    </div>
+                </div>
               <div id="mapwrap">
               <!-- 지도가 표시될 div -->
-              <div id="map" style="width:100%;height:400px;"></div>
+                  <div id="map" style="width:100%;height:400px;">
+                  </div>
+              </div>
           </a>
       </div>
     </div>
 
   </div>
- <h1>aaa</h1>
-      <table>
-  {% for result in results %}
-  <tr>
-      <td>
-          {{result.person_num}}
-      </td>
-      <td>
-          {{result.place}}
-      </td>
-      <td>
-          {{result.address}}
-      </td>
-      <td>
-          {{result.latitude}}
-      </td>
-      <td>
-          {{result.longitude}}
-      </td>
-  </tr>
-  {% endfor %}
-</table>
-  <h1>aaa</h1>
+
   <hr>
 
   <!-- Footer -->
@@ -154,27 +130,18 @@
             <p>
                 <a class="nomal_text" id="kakao-link-btn" href="javascript:;" style="text-decoration:none;font-family:Open Sans,Helvetica Neue">
                     <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_small.png"/>
-                    <font size="3"> 카카오톡으로 공유
+                    <font size="3"/> 카카오톡으로 공유
                 </a>
              </p>
             </div>
         </div>
     </div>
 
-
-    <script type='text/javascript'>
-</script>
-
-
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
 
           <p class="copyright text-muted">제보 및 문의: ib7872@naver.com</p>
-
-
-
-
 		  </div>
       </div>
     </div>
@@ -187,10 +154,163 @@
   <!-- Custom scripts for this template -->
   <script src="{% static 'js/clean-blog.min.js' %}"></script>
 
-  <script type="text/javascript" src="{% static 'js/link.js' %}?api={{api_key}}"></script>
+  <!-- <script type="text/javascript" src="{% static 'js/link.js' %}?api={{api_key}}"></script> -->
 
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey={{api_key}}"></script>
-  <script type="text/javascript" src="{% static 'js/kakaoMap3.js' %}"></script>
+    <!--  <script type="text/javascript" src="{% static 'js/kakaoMap3.js' %}"></script>-->
+    <script type="text/javascript">
+        var map = document.getElementById('map');
+        var new_map = '';
+        var poly = '';
+        var poly_list = []
+        var over_lay = [];
+        var poly_line = [];
+        var poly_color = '';
+        // 넘겨온 데이터 받기
+        {% autoescape off %}
+        var results_map = {{results_map}};
+        var results_transportation_map = {{results_transportation_map}};
+        var results_region_map = {{results_region_map}};
+        {% endautoescape %}
+        
+        $(document).ready(function () {
+            // 지도 맵 생성
+            createMap();
+            changeMarker('all');
+        });
+
+        // 맵 생성
+        function createMap () {
+            var map = document.getElementById('map');
+            var mapOtion = {
+                center: new kakao.maps.LatLng(37.885397	,127.729773),
+                level: 11 // 지도 확대 레벨
+            }
+            new_map = new kakao.maps.Map(map, mapOtion);
+        }
+
+        function drawing(person_num) {
+             initMap()
+             $.each(results_map, function(key, person){
+                 if (person_num.length == 0){
+                     setOverLay(person);
+                 } else {
+                     if (person_num.includes(key)) {
+                         setOverLay(person);
+                     }
+                 }
+             });
+
+            //polyline 표시 - 마커와 마커 사이 그려줘야 함
+            $.each(results_transportation_map , function(key, date) {
+                 if (person_num.length == 0){
+                     drawployline(key, date);
+                 } else {
+                     if (person_num.includes(key)) {
+                         drawployline(key, date);
+                     }
+                 }
+
+            });
+
+            //overlay 그리기
+            setMap(new_map)
+        }
+
+        var initMap = function () {
+            setMap(null);
+            over_lay = [];
+            $.each(poly_list, function (idx, poly) {
+                poly.setPath(null);
+                poly.setMap(null);
+            })
+        }
+
+        var setMap = function (map) {
+            $.each(over_lay, function(key, value) {
+               over_lay[key].setMap(map);
+            });
+        }
+
+        // 커스텀 오버레이 표시
+        var setOverLay = function (person) {
+            var position = '';
+            $.each(person, function(key, one_person){                
+                position =
+                    '<div class="wrap">' +
+                    '    <div class="info">' +
+                    '        <div class="title">' +
+                             one_person.place +
+                    '        </div>' +
+                    '        <div class="body">' +
+                    '            <div class="img">' +
+                                one_person.region + '' + one_person.region_id +
+                    '           </div>' +
+                    '            <div class="desc">' +
+                    '                <div class="ellipsis">이동수단: '+ one_person.transportation.substring(0, 8)+'</div>' + //최대 8글자
+                    '                <div class="jibun ellipsis">방문일자: '+one_person.visited_date+'</div>' +//
+                    '            </div>' +
+                    '        </div>' +
+                    '    </div>' +
+                    '</div>' +
+                    '<div class="circle">'+
+                    one_person.person_num+
+                    '</div>';
+                
+                over_lay.push(new kakao.maps.CustomOverlay({
+                  content: position,//마커 내용
+                  position: new kakao.maps.LatLng(one_person.latitude, one_person.longitude) // 경로 설정
+                }));
+            });
+        }
+
+        // 선 그리는 곳
+        var drawployline = function (person, date) {
+                $.each(date , function(idx ,path_list) {
+                    poly = new kakao.maps.Polyline();
+                    $.each(path_list, function (i, path) {
+                        // 가져온 데이터 new LatLng 생성
+                        poly_line.push(new kakao.maps.LatLng(path.latitude, path.longitude));
+                        // poly_color.push(path.color);
+                        poly_color = path.color;
+                    });
+
+                    // setPolyline(poly_line);
+                    poly.setOptions({
+                        strokeWeight: 5,
+                        strokeColor: poly_color,
+                        strokeOpacity: 0.8,
+                        strokeStyle: 'solid'
+                    });
+
+                    poly.setPath(poly_line);
+                    poly.setMap(new_map);
+                    poly_list.push(poly)
+                    poly_line = [];
+                    poly_color = '';
+                });
+
+        }
+
+        // 지역을 변경할때 사용하는 함수
+        var changeMarker = function(check_regions) {
+            // type을 받아서 누른 id를 비교
+            var people_info = [];
+            var check_region_list = check_regions.split(',');
+            if (check_region_list[0] != 'all') {
+                check_region_list.forEach(function (check_region) {
+                    $.each(results_region_map, function (region, person_num_list) {
+                        // 지역으로 person의 정를 get
+                        if (region == check_region) {
+                            people_info = people_info.concat(person_num_list)
+                        }
+                    });
+                })
+                people_info = Array.from(new Set(people_info));
+            }
+            drawing(people_info);
+        }
+    </script>
 
 </body>
 

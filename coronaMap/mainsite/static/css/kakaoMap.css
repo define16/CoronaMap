@@ -7,29 +7,50 @@
 .category .ico_coffee {background-position:-10px 0;}
 .category .ico_store {background-position:-10px -36px;}
 .category .ico_carpark {background-position:-10px -72px;}
-.label {margin-bottom: 96px;}
-.label * {display: inline-block;vertical-align: top;}
-.label .left {background: url("http://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_l.png") no-repeat;display: inline-block;height: 24px;overflow: hidden;vertical-align: top;width: 7px;}
-.label .center {background: url(http://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_bg.png) repeat-x;display: inline-block;height: 24px;font-size: 12px;line-height: 24px;}
-.label .right {background: url("http://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_r.png") -1px 0  no-repeat;display: inline-block;height: 24px;overflow: hidden;width: 6px;}
 
-    .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+
+.label {position:absolute;bottom:-80px;right:-50px;}
+.label * {display: inlne-block;}
+.label .left {background: url("http://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_l.png") no-repeat;height: 24;overflow: hidden;vertical-align: top;width: 7px;}
+.label .center {background: url(http://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_bg.png) repeat-x;height: 24;font-size: 12px;line-height: 24px;}
+.label .right {background: url("http://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_r.png") -1px 0  no-repeat;height: 24px;overflow: hidden;width: 6px;}
+
+
+/* .circle {width:40px;height:40px;border-radius:50%;background:#393939;font-size:20px;text-align:center;line-height:43px; color:#FFFFFF; font-weight: bold;font-family:'Malgun Gothic','맑은 고딕',sans-serif;transform:scale(.6);} */
+.circle {position:absolute;bottom: -10px;left:-15px;width:35px;height:35px;border-radius:50%;background:#393939;font-size:20px;text-align:center;line-height:40px; color:#FFFFFF; font-weight: bold;font-family:'Malgun Gothic','맑은 고딕',sans-serif;transform:scale(.6);}
+
+    /*
+     박스
+    */
+    .wrap {position: absolute;left: 0;bottom: 5px;width: 168px;height: 73px;margin-left: -83px;text-align: left;overflow: hidden; font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5; transform:scale(.9);}
     .wrap * {padding: 0;margin: 0;}
-    .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
-    .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
-    .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
-    .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
-    .info .close:hover {cursor: pointer;}
-    .info .body {position: relative;overflow: hidden;}
-    .info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
-    .desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
-    .desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
-    .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
-    .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
-    .info .link {color: #5085BB;}
 
-.label {margin-bottom: 96px;}
-.label * {display: inline-block;vertical-align: top;}
-.label .left {background: url("http://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_l.png") no-repeat;display: inline-block;height: 24px;overflow: hidden;vertical-align: top;width: 7px;}
-.label .center {background: url(http://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_bg.png) repeat-x;display: inline-block;height: 24px;font-size: 12px;line-height: 24px;}
-.label .right {background: url("http://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_r.png") -1px 0  no-repeat;display: inline-block;height: 24px;overflow: hidden;width: 6px;}
+    /*
+     박스테두리(너비, 높이, 원둥글기 정도, 그림자,)
+    */
+    .wrap .info {width: 166px;height: 63px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;transform:scale(.8);}
+    .wrap .info:nth-child(1) {border: 0box-shadow: 0px 1px 2px #888;}
+    /*
+     제목사이즈(위아래 간격)
+    */
+    .info .title {padding: 1px 0 0 7px;height: 22px;background: #eee;border-bottom: 1px solid #ddd;font-size: 15px;font-weight: bold;text-align: left;}
+
+    /*
+     본문내용
+    */
+
+    .info .body {position: relative;overflow: hidden;}
+    .info .desc {position: relative;margin: 4px 0 0 40px;height: 75px;}
+    .desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;transform:scale(1.1);}
+    .desc .jibun {font-size: 11px;color: #888;margin:-1px 0 0 -11px;transform:scale(0.9);}
+
+    /*
+     이미지
+    */
+    .info .img {position: absolute;top: 1px;left: 3px;width: 30px;height: 37px;border: 1px solid #ddd;color: #888;white-space: normal;word-break: break-all;overflow: visible;font-size:12px;text-align: center;transform:scale(.8);font-weight: bold;}
+    /*
+     삼각형
+    */
+    /* .info:after {content: '';position: absolute;margin: 0px 0 -20px 0px;left: 50%;bottom: 7px;width: 22px;height: 15px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png');transform:scale(.8);} */
+    /* .info .link {color: #5085BB;} */
+
