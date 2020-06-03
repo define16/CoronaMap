@@ -1,6 +1,7 @@
 import csv
 import json
 import os
+import shutil
 import sys
 import pymysql;
 
@@ -30,22 +31,32 @@ def insert_data(data, data_size):
                 if line[3] == '-':
                     line[3] = 19900101
 
-                sql = "INSERT INTO infected_people (person_num, region, region_id, visited_date, place, address, latitude, longitude, transportation) " \
-                      "VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-                cursor.execute(sql, tuple(line))
-
+                sql = "INSERT INTO infected_people (person_num, region, region_id, visited_date, place, address, latitude, longitude, transportation) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+#                cursor.execute(sql, tuple(line))
+                print(line)
                 print("Inserting (%d%%): [%d / %d] " % (progressbar/data_size * 100, progressbar, data_size))
-        db.commit()
+        # db.commit()
 
     finally:
-        db.close();
+        # db.close();
+        pass
 
-# 파일명을 인자 값에서 가지고 온다.
-path = os.path.join(os.path.abspath("./"), 'data', str(sys.argv[1]))
-print(path)
-init()
-f = open(path, 'r', encoding='utf-8')
-data = csv.reader(f)
-data_size = len(open(path, 'r', encoding='utf-8').readlines())
-insert_data(data, data_size)
-f.close()
+
+file_list = os.listdir(os.path.join(".",'data'))
+file_list_csv = [file for file in file_list if file.endswith(".csv")]
+
+print(file_list_csv)
+
+#init()
+for file_csv in file_list_csv:
+    path = os.path.join(".",'data', file_csv)
+    f = open(path, 'r', encoding='utf-8')
+    data = csv.reader(f)
+    data_size = len(open(path, 'r', encoding='utf-8').readlines())
+    insert_data(data, data_size)
+    if not os.path.isdir('finish'):
+        os.makedirs('finish')
+
+    shutil.move(os.path.join('.','data', file_csv), os.path.join('.','finish'))
+
+    f.close()
