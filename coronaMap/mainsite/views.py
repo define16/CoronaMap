@@ -3,13 +3,15 @@ import json
 import os
 from .models import InfectedPeople
 from .processing import DataProcessing
+from django.shortcuts import redirect
 
-key_path = os.path.join( os.getcwd(), 'coronaMap' , 'conf', 'apikey.json')
+
+key_path = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'coronaMap' , 'conf', 'apikey.json')
 with open(key_path, 'r') as f:
     json_data = json.load(f)
 
-# kakao_api = json_data['kakao'] # 본 서버용
-kakao_api = json_data['kakao_test'] # 테스트용
+kakao_api = json_data['kakao'] # 본 서버용
+# kakao_api = json_data['kakao_test'] # 테스트용
 processing = DataProcessing()
 
 # Create your views here.
@@ -41,7 +43,6 @@ def nearby_clinic(request):
 
 def prevent(request):
     return render(request, 'prevent.html')
-
 
 # ssl 인증용
 def ssl(request):

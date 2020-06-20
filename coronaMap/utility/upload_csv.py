@@ -5,8 +5,6 @@ import shutil
 import sys
 import pymysql;
 
-# D:\Programing Folder\Python\Corona\coronaMap\coronaMap\conf\dbkey.json
-# D:\Programing Folder\Python\Corona\coronaMap\utility\data\real.csv
 def init():
     global db, cursor;
     path = os.path.join(os.path.abspath("../coronaMap"), 'conf', 'dbkey.json')
@@ -32,13 +30,13 @@ def insert_data(data, data_size):
                     line[3] = 19900101
 
                 sql = "INSERT INTO infected_people (person_num, region, region_id, visited_date, place, address, latitude, longitude, transportation) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-#                cursor.execute(sql, tuple(line))
-                print(line)
+                cursor.execute(sql, tuple(line))
+                #print(line)
                 print("Inserting (%d%%): [%d / %d] " % (progressbar/data_size * 100, progressbar, data_size))
-        # db.commit()
+        db.commit()
 
     finally:
-        # db.close();
+        db.close();
         pass
 
 
@@ -47,7 +45,7 @@ file_list_csv = [file for file in file_list if file.endswith(".csv")]
 
 print(file_list_csv)
 
-#init()
+init()
 for file_csv in file_list_csv:
     path = os.path.join(".",'data', file_csv)
     f = open(path, 'r', encoding='utf-8')

@@ -9,6 +9,9 @@
   <meta name="author" content="">
 
   <title>CoronaMapGW</title>
+  <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+
+
 	
  <style>
 .label {margin-bottom: 96px;}
@@ -16,6 +19,11 @@
 .label .left {background: url("http://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_l.png") no-repeat;display: inline-block;height: 24px;overflow: hidden;vertical-align: top;width: 7px;}
 .label .center {background: url(http://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_bg.png) repeat-x;display: inline-block;height: 24px;font-size: 12px;line-height: 24px;}
 .label .right {background: url("http://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_r.png") -1px 0  no-repeat;display: inline-block;height: 24px;overflow: hidden;width: 6px;}
+.button2 {
+  border: none;
+  padding: none;
+ 
+}
 </style>
     
     <link rel="preload" href="{% static 'css/kakaoMap.css' %}" as="style" crossorigin="crossorigin"> 
@@ -32,9 +40,7 @@
   <link href="{% static 'css/clean-blog.min.css' %}" rel="stylesheet">
   <!-- Kakao Map -->
   <link href="{% static 'css/kakaoMap.css' %}" rel="stylesheet" type="text/css">
-    <script type="javascript">
-
-    </script>
+    
 </head>
 
 <body>
@@ -86,7 +92,8 @@
               </div>
               <div class="dropdown">
                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      확진자 : {{total_person_cnt}}명
+                      확진자 : 60명
+<!-- {{total_person_cnt}} 확진자 명수                       -->
                   </button>
 
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -107,14 +114,20 @@
                     <div style="float:right;position: relative;z-index: 3; top: 5px; "><img src={% static 'img/aa.png' %} style="max-width:100%;height:100px;"></img>
                     </div>
                 </div>
+              
+              <div style="position:absolute; left:20px;">
+                  <div style="float:right;position: relative;z-index: 3; top: 5px; ">
+                          <img onclick='MyLocation()' src={% static 'img/myloc.png' %} style="width:35%;height:35%;opacity:0.9;" ></img> 
+                    </div>
+              </div>
+          
               <div id="mapwrap">
               <!-- 지도가 표시될 div -->
-                  <div id="map" style="width:100%;height:400px;">
-                  </div>
+                  <div id="map" style="width:100%;height:400px;"></div>
               </div>
           </a>
       </div>
-    </div>
+    
 
   </div>
 
@@ -122,21 +135,65 @@
 
   <!-- Footer -->
   <footer>
-    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
-            <p>
-                <a class="nomal_text" id="kakao-link-btn" href="javascript:;" style="text-decoration:none;font-family:Open Sans,Helvetica Neue">
-                    <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_small.png"/>
-                    <font size="3"/> 카카오톡으로 공유
-                </a>
-             </p>
+                 
+    <div>
+        <div class="modal fade" id="intro" role="dialog" aria-labelledby="introHeader" aria-hidden="true" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Notice</h4>
+                    </div>
+                    <div class="modal-body">
+                        안녕하세요.<br>
+                        코로나맵강원 운영자입니다.<br><br>
+                        확진자들의 개인정보 보호를 위하여,<br>
+                        최근 2주간의 동선 정보만을 표시하기로 결정했습니다.<br><br>
+                        건강 조심하세요, 감사합니다.<br>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+           
+        <a id="kakao-link-btn" href="javascript:sendLink()">
+            <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_small.png"/>
+            <font size="3"/>카카오톡으로 공유
+        </a>
+        
+        <script type='text/javascript'>
+            <!-- // // 사용할 앱의 JavaScript 키를 설정해 주세요. -->
+            Kakao.init('754fb9128b5e18c3f22b652f95ae05cc');
+            function sendLink(){
+            <!-- // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다. -->
+                Kakao.Link.createDefaultButton({
+                    container: '#kakao-link-btn',
+                    objectType: 'feed',
+                    content: {
+                        title: 'CoronaMapGW',
+                        description: '강원도 시군구별 코로나19 확진자 동선을 시각화한 사이트입니다. ',
+                        imageUrl: '',
+                        link: {
+                            mobileWebUrl: 'https://coronamapgw.com'
+                        }
+                    },
 
+                    buttons: [
+                        {
+                            title: '사이트 접속',
+                            link: {
+                                mobileWebUrl: 'https://coronamapgw.com'
+                            }
+                        }
+                    ]
+                });}
+        </script>
+             
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
@@ -153,12 +210,9 @@
 
   <!-- Custom scripts for this template -->
   <script src="{% static 'js/clean-blog.min.js' %}"></script>
-
-  <!-- <script type="text/javascript" src="{% static 'js/link.js' %}?api={{api_key}}"></script> -->
-
+  <script type="text/javascript" src="{% static 'js/link.js' %}?api={{api_key}}"></script>
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey={{api_key}}"></script>
-    <!--  <script type="text/javascript" src="{% static 'js/kakaoMap3.js' %}"></script>-->
-    <script type="text/javascript">
+  <script type="text/javascript">
         var map = document.getElementById('map');
         var new_map = '';
         var poly = '';
@@ -176,20 +230,87 @@
         $(document).ready(function () {
             // 지도 맵 생성
             createMap();
-            changeMarker('all');
-        });
+            changeMarker('all'); 
+            popup();
+        }); 
+         
+        function popup(){
+            $("#intro").ready(function(){
+                $('div.modal').modal();
+            })
+        }
 
         // 맵 생성
         function createMap () {
             var map = document.getElementById('map');
             var mapOtion = {
-                center: new kakao.maps.LatLng(37.885397	,127.729773),
+                center: new kakao.maps.LatLng(37.878095, 128.218756),
                 level: 11 // 지도 확대 레벨
             }
             new_map = new kakao.maps.Map(map, mapOtion);
+            
+
+        }
+         
+        function MyLocation(){
+            changeMarker('all');
+             if (navigator.geolocation) {
+
+           // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+   navigator.geolocation.getCurrentPosition(function(position) {
+
+       var lat = position.coords.latitude, // 위도
+           lon = position.coords.longitude; // 경도
+
+       var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+           message = '<div style="padding:3px; width:100%; height:100%; font-size:0.85em;">사용자 위치</div>'; // 인포윈도우에 표시될 내용입니다
+
+       // 마커와 인포윈도우를 표시합니다
+       displayMarker(locPosition, message);
+
+     });
+
+} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+
+   var locPosition = new kakao.maps.LatLng(37.885397	,127.729773),
+       message = 'geolocation을 사용할수 없어요..'
+
+   displayMarker(locPosition, message);
+}
         }
 
+
+// 지도에 마커와 인포윈도우를 표시하는 함수입니다
+function displayMarker(locPosition, message) {
+
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({  
+        map: new_map, 
+        position: locPosition
+    }); 
+    
+    var iwContent = message, // 인포윈도우에 표시할 내용
+        iwRemoveable = true;
+
+    // 인포윈도우를 생성합니다
+    var infowindow = new kakao.maps.InfoWindow({
+        content : iwContent,
+        removable : iwRemoveable
+    });
+    
+    // 인포윈도우를 마커위에 표시합니다 
+    infowindow.open(new_map, marker);
+    
+    new_map.setLevel(5);
+    // 지도 중심좌표를 접속위치로 변경합니다
+    new_map.setCenter(locPosition);      
+}    
+         
+  
+         
+
         function drawing(person_num) {
+  
              initMap()
              $.each(results_map, function(key, person){
                  if (person_num.length == 0){
@@ -309,6 +430,9 @@
                 people_info = Array.from(new Set(people_info));
             }
             drawing(people_info);
+            new_map.setLevel(11);
+            var firstLoc = new kakao.maps.LatLng(37.878095, 128.218756);
+            new_map.panTo(firstLoc);
         }
     </script>
 

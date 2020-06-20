@@ -1,3 +1,4 @@
+
 #mapwrap{position:relative;overflow:hidden;}
 .category, .category *{margin:0;padding:0;color:#000;}
 .category {position:absolute;overflow:hidden;top:10px;left:10px;width:150px;height:50px;z-index:10;border:1px solid black;font-family:'Malgun Gothic','맑은 고딕',sans-serif;font-size:12px;text-align:center;background-color:#fff;}

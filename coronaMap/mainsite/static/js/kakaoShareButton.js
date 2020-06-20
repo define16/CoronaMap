@@ -29,7 +29,7 @@ Kakao.Link.createDefaultButton({
     description: '강원도 시군구별 코로나19 확진자 동선을 시각화한 사이트입니다. ',
     imageUrl: '',
     link: {
-      mobileWebUrl: 'http://coronamapgw.com'
+      mobileWebUrl: 'https://coronamapgw.com'
     }
   },
 
@@ -37,7 +37,7 @@ Kakao.Link.createDefaultButton({
     {
       title: '사이트 접속',
       link: {
-        mobileWebUrl: 'http://coronamapgw.com'
+        mobileWebUrl: 'https://coronamapgw.com'
       }
     }
   ]

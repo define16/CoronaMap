@@ -28,6 +28,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SECURE_SSL_REDIRECT = True
+
+
+
 
 # Application definition
 
@@ -75,7 +80,8 @@ WSGI_APPLICATION = 'coronaMap.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-key_path = os.path.join(os.getcwd(), 'coronaMap' , 'conf', 'dbkey.json')
+
+key_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'conf', 'dbkey.json')
 with open(key_path, 'r') as f:
     json_data = json.load(f)
 

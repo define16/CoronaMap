@@ -1,0 +1,5 @@
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password you want';
+FLUSH PRIVILEGES;
+
+ALTER DATABASE CoronaMap_DB DEFAULT CHARACTER SET UTF8;
+ALTER TABLE infected_people CONVERT TO CHARACTER SET UTF8;
