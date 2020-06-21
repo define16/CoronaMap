@@ -3,6 +3,7 @@ coronaMap/*/__pycache__/
 *.py[cod]
 *$py.class
 
+goorm.manifest
 
 # C extensions
 *.so

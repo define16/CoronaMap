@@ -2,9 +2,9 @@ from .models import InfectedPeople
 from pprint import pprint
 
 class DataProcessing():
-    GREEN ="#00ff00"
+    GREEN = "#00ff00"
     YELLOW = "#ffff00"
-    RED =  "#FF0000"
+    RED = "#FF0000"
     BLACK = "#000000"
     colour_template = {"자차": GREEN, "도보": YELLOW, "대중교통": RED}
 
@@ -21,7 +21,8 @@ class DataProcessing():
         check_date: int = 0
 
         for result in results:
-            if result.person_num != check_person_num or len(results) == total_spot_cnt: # 사람별로 구분
+            # if result.person_num != check_person_num or len(results) == total_spot_cnt:  # 사람별로 구분
+            if result.person_num != check_person_num:  # 사람별로 구분
                 results_dic["person_" + str(check_person_num)] = person_dic
                 spot_cnt = 0
                 person_dic = {}
@@ -30,17 +31,17 @@ class DataProcessing():
             color = self.convert_color(tmp_transportation)
 
             if int(result.visited_date) != check_date :
-                change_date = 1 # 날짜가 바뀌었을 때
+                change_date = 1  # 날짜가 바뀌었을 때
             else :
-                change_date = 0; # 날짜가 안 바뀌었을 때(즉, 같은날 이동)
+                change_date = 0  # 날짜가 안 바뀌었을 때(즉, 같은날 이동)
             spot_dic = {'person_num' : result.person_num, 'region': result.region ,'region_id': result.region_id ,
                         'visited_date': result.visited_date, 'address': result.address,'place': result.place,
                         'latitude': result.latitude, 'longitude': result.longitude,
                         'transportation': result.transportation,'color': color, 'change_date' : change_date}
             person_dic[str(spot_cnt)] = spot_dic
-            spot_cnt+=1
+            spot_cnt += 1
             check_date = result.visited_date
-            check_person_num = result.person_num #
+            check_person_num = result.person_num
             total_spot_cnt += 1
 
         results_dic["person_" + str(check_person_num)] = person_dic # 마지막 Index 저장
@@ -54,7 +55,7 @@ class DataProcessing():
         """
         results_transportation_dic = {}
         for key, results in results_dic.items():  # 사람별로 구분
-            date_tmp = 0;
+            date_tmp = 0
             transport_tmp = ""
             latitude_before = ""
             longitude_before = ""
@@ -149,120 +150,3 @@ class DataProcessing():
                         print("longitude :", spot.get('longitude'))
                         print("color :", spot.get('color'))
                         print()
-
-                        
-    def separate_by_transport_tmp(self, results_dic:dict):
-        """
-        분리 X
-        """
-        results_transportation_dic = {}
-        for key, results in results_dic.items():  # 사람별로 구분
-            person_dic = []
-
-            for result in results.values():  # 날짜 + 이동수단로 구분
-                # 하루에 하나의 장소만 간 경우 또는 하나의 이동수단만 이용한 경우
-                spot_dic = {"latitude": result.get("latitude"), "longitude": result.get("longitude"),
-                            "color": self.convert_color(result.get("transportation"))}
-                person_dic.append(spot_dic)
-
-            results_transportation_dic[key] = person_dic
-
-        return  results_transportation_dic
-
-    def separate_by_transport_tmp2(self, results_dic:dict):
-        """
-        날짜-이동수단별 분리
-        results_dic : separate_by_date를 마친 dictionary
-        """
-        results_transportation_dic = {}
-        for key, results in results_dic.items():  # 사람별로 구분
-            date_tmp = 0;
-            transport_tmp = ""
-            latitude_before = ""
-            longitude_before = ""
-            path_dic = {}
-            transport_dic = {}
-            date_dic = {}
-            transport_idx = 0
-            path_idx = 0
-
-            for result in results.values():  # 날짜 + 이동수단로 구분
-                if result.get("visited_date") == date_tmp or not path_dic:
-                    # 날짜별로 구분
-                    if transport_tmp == "" or result.get("transportation") == transport_tmp:  # 같은 이동수단으로 다음 장소로 이동한 경우
-                        latitude_before = result.get("latitude")
-                        longitude_before = result.get("longitude")
-                        spot_dic = {"latitude": result.get("latitude"), "longitude": result.get("longitude"),
-                                    "color": self.convert_color(result.get("transportation"))}
-                        path_dic[str(path_idx)] = spot_dic
-                        path_idx += 1
-                    else:  # 이동수단을 변경한 경우
-                        spot_dic = {"latitude": latitude_before, "longitude": longitude_before,
-                                    "color": self.convert_color(transport_tmp)}
-                        path_dic[str(path_idx)] = spot_dic
-                        path_idx += 1
-                        transport_dic["transport" + str(transport_idx)] = path_dic # 현 이동수단으로 움직인 경로를 저장
-                        transport_idx += 1
-                        path_dic = {}  # 경로 초기화
-                        path_idx = 0
-                        spot_dic = {"latitude": result.get("latitude"), "longitude": result.get("longitude"),
-                                    "color": self.convert_color(result.get("transportation"))}
-                        path_dic[str(path_idx)] = spot_dic
-                        path_idx += 1
-                else:
-                    # 하루에 하나의 장소만 간 경우 또는 하나의 이동수단만 이용한 경우
-                    if not transport_dic or len(transport_dic) == 1:
-                        transport_dic["transport" + str(transport_idx)] = path_dic
-                        path_dic = {}
-
-                    date_dic[str(date_tmp)] = transport_dic
-                    transport_dic = {}
-                    transport_idx = 0
-                    path_idx = 0
-                    latitude_before = result.get("latitude")
-                    longitude_before = result.get("longitude")
-
-                    spot_dic = {"latitude": result.get("latitude"), "longitude": result.get("longitude"),
-                                "color": self.convert_color(result.get("transportation"))}
-                    path_dic[str(path_idx)] = spot_dic
-                    path_idx += 1
-
-                transport_tmp = result.get("transportation")  # 이전(index-1) 이동수단
-                date_tmp = result.get("visited_date")  # 이전(index-1) 날짜
-
-            transport_dic["transport" + str(transport_idx)] = path_dic
-
-            date_dic[str(date_tmp)] = transport_dic  # 마지막 날짜를 저장
-            results_transportation_dic[key] = date_dic
-
-        return  results_transportation_dic
-
-    def separate_by_transport_tmp3(self, results_dic: dict):
-        """
-        날짜-이동수단별 분리
-        results_dic : separate_by_date를 마친 dictionary
-        """
-        results_transportation_dic = {}
-        for key, results in results_dic.items():  # 사람별로 구분
-            date_tmp = 0;
-            transport_dic = {'lat_lon' : [], 'color': ''}
-            date_dic = {}
-
-            for result in results.values():  # 날짜 + 이동수단로 구분
-                lat_lon = []
-                if not (result.get("visited_date") == date_tmp or not transport_dic) :
-                    # 날짜별로 구분
-                    transport_dic = {'lat_lon': [], 'color': ''}
-
-                lat_lon.append(result.get("latitude"))
-                lat_lon.append(result.get("longitude"))
-
-                transport_dic['lat_lon'].append(lat_lon)
-                transport_dic['color'] = self.convert_color(result.get("transportation"))
-
-                date_tmp = result.get("visited_date")
-                date_dic[str(date_tmp)] = transport_dic
-
-            results_transportation_dic[key] = date_dic
-
-        return results_transportation_dic
