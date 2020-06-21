@@ -1,11 +1,15 @@
 from django.shortcuts import render, HttpResponse
 import json
 import os
+import logging
+
+from datetime import datetime, timedelta
 from .models import InfectedPeople
 from .processing import DataProcessing
 from django.shortcuts import redirect
 
 
+logger = logging.getLogger(__name__)
 key_path = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'coronaMap' , 'conf', 'apikey.json')
 with open(key_path, 'r') as f:
     json_data = json.load(f)
@@ -16,7 +20,8 @@ processing = DataProcessing()
 
 # Create your views here.
 def index(request):
-    results = InfectedPeople.objects.all().order_by('person_num', 'visited_date') # -는 내림차순
+    today = int((datetime.today() + timedelta(days=-14)).strftime("%Y%m%d"))
+    results = InfectedPeople.objects.all().filter(visited_date__gte=today).order_by('person_num', 'visited_date')  # -는 내림차순
 
     # 커스텀 오버레이, 날짜별 방문 장소를 분리
     results_dic = processing.separate_by_date(results)
@@ -29,8 +34,12 @@ def index(request):
     results_transportation_json = json.dumps(results_transportation_dic).encode('utf-8').decode() # 추가
     results_region_json = json.dumps(results_region_dic).encode('utf-8').decode()  # 추가
 
-    return render(request, 'index.html', {'api_key' : kakao_api, 'total_person_cnt' : len(results_dic) ,  'results_map'
-    : results_json, 'results_transportation_map' : results_transportation_json, 'results_region_map' : results_region_json})
+    log_debug({'api_key' : kakao_api, 'total_person_cnt' : len(results_dic) ,  'results_map'
+    : results_dic, 'results_transportation_map' : results_transportation_dic, 'results_region_map' : results_region_dic})
+
+    send_data = {'api_key' : kakao_api, 'total_person_cnt' : len(results_dic) ,  'results_map'
+    : results_json, 'results_transportation_map' : results_transportation_json, 'results_region_map' : results_region_json}
+    return render(request, 'index.html', send_data)
 
 def status(request):
     return render(request, 'status.html')
@@ -58,3 +67,15 @@ def search():
     full_filename = os.path.join(dirname, filenames[0])
     urlname = '.well-known/acme-challenge/' + filenames[0]
     return urlname, full_filename
+
+
+
+
+def log_info(massge):
+    logging.info(massge)
+
+def log_debug(massge):
+    logging.debug(massge)
+
+def log_error(massge):
+    logging.warning(massge)
