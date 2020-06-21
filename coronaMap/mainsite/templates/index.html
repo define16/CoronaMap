@@ -22,7 +22,7 @@
 .button2 {
   border: none;
   padding: none;
-
+ 
 }
 </style>
     
@@ -168,8 +168,9 @@
         
         <script type='text/javascript'>
             <!-- // // 사용할 앱의 JavaScript 키를 설정해 주세요. -->
-            Kakao.init({{api_key}});
+            Kakao.init('754fb9128b5e18c3f22b652f95ae05cc');
             function sendLink(){
+            <!-- // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다. -->
                 Kakao.Link.createDefaultButton({
                     container: '#kakao-link-btn',
                     objectType: 'feed',
@@ -198,6 +199,7 @@
         <div class="col-lg-8 col-md-10 mx-auto">
           <p class="copyright text-muted">제보 및 문의: ib7872@naver.com<br>사이트 불편 신고: radix7318@gmail.com</p>
 
+          <p class="copyright text-muted">제보 및 문의: ib7872@naver.com</p>
 		  </div>
       </div>
     </div>
@@ -228,10 +230,11 @@
         var userurl = window.location.protocol;
         {% endautoescape %}
         
-        // if(userurl=="http:") {
-        //     location.replace("https://coronamapgw.com");
-        // }
-        //
+        if(userurl=="http:")
+                {
+                    location.replace("https://coronamapgw.com");
+                }
+
         $(document).ready(function () {
             // 지도 맵 생성
             createMap();
@@ -269,9 +272,9 @@
             //         location.replace("https://coronamapgw.com");
             //         // location.href("naver.com");
             //     }
-            
-            
-            
+
+
+
             changeMarker('all');
              if (navigator.geolocation) {
 
