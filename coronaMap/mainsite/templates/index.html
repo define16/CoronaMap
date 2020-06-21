@@ -220,13 +220,20 @@
         var over_lay = [];
         var poly_line = [];
         var poly_color = '';
+        count = 0;
         // 넘겨온 데이터 받기
         {% autoescape off %}
         var results_map = {{results_map}};
         var results_transportation_map = {{results_transportation_map}};
         var results_region_map = {{results_region_map}};
+        var userurl = window.location.protocol;
         {% endautoescape %}
         
+        if(userurl=="http:")
+                {
+                    location.replace("https://coronamapgw.com");
+                }
+         
         $(document).ready(function () {
             // 지도 맵 생성
             createMap();
@@ -253,6 +260,20 @@
         }
          
         function MyLocation(){
+            // if (count == 0 )
+            //     {
+            //         location.replace("https://coronamapgw.com");
+            //         count=1;
+
+            //     }
+            // if ((userurl == "http://coronamapgw.com") || (userurl == "coronamapgw.com"))
+            //     {
+            //         location.replace("https://coronamapgw.com");
+            //         // location.href("naver.com");
+            //     }
+            
+            
+            
             changeMarker('all');
              if (navigator.geolocation) {
 
